@@ -1,0 +1,76 @@
+/*
+ * Theme settings
+ */
+
+// Primary pallete
+
+$primary: #8a8a8a;
+$on-primary: #ffffff;
+$primary-container: #eaddff;
+$on-primary-container: #565656;
+
+// Secondary pallete
+
+$secondary: #625b71;
+$on-secondary: #ffffff;
+$secondary-container: #e8def8;
+$on-secondary-container: #1d192b;
+
+// Surfaces
+
+$surface-container-lowest: #fef7ff;
+$surface-container-low: #f7f2fa;
+$surface-container-medium: #8a8a8a;
+$surface-container-high: #6a6a6a;
+$surface-container-highest: #454545;
+
+$on-surface: #ffffff; 
+
+$colors: (
+  primary: #8a8a8a,
+  on-primary: #FFFFFF,
+  primary-container: #FFFFFF,
+  on-primary-container: #565656,
+
+  secondary: #625b71,
+  on-secondary: #ffffff,
+  secondary-container: #e8def8,
+  on-secondary-container: #1d192b,
+  
+  surface-container-lowest: #fef7ff,
+  surface-container-low: #f7f2fa,
+  surface-container-medium: #8a8a8a,
+  surface-container-high: #6a6a6a,
+  surface-container-highest: #454545,
+  surface-container-on-surface: #ffffff,
+
+  on-surface: #FFF
+);
+
+// Spacings
+
+$spacing-xs: 2px;
+$spacing-s: 4px;
+$spacing-m: 8px;
+$spacing-l: 16px;
+$spacing-xl: 32px;
+
+$spacing-values: (
+  xs: 2px,
+  s: 4px,
+  m: 8px,
+  l: 16px,
+  xl: 32px
+);
+
+// Sizes
+
+$size-s: 16px;
+$size-m: 24px;
+$size-l: 32px;
+
+$size-values: (
+  s: 24px,
+  m: 32px,
+  l: 48px
+);

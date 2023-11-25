@@ -1,0 +1,80 @@
+@import "./Theme.scss";
+
+/*
+ * Predefined classes
+ */
+
+/*
+ * Syntax:
+ * .color-primary { color: #6750a4; }
+ *
+*/
+
+$color-attributes: color, background-color;
+
+@each $size, $value in $colors {
+  @each $attribute in $color-attributes {
+    .#{$attribute}-#{$size} {
+      #{$attribute}: $value;
+    }
+  }
+}
+
+/*
+ * Syntax:
+ * .padding-xs: { padding: 2px; }
+ *
+*/
+
+$spacing-attributes: padding, padding-top, padding-right, padding-bottom, padding-left, margin, margin-top, margin-right,
+  margin-bottom, margin-left;
+
+@each $size, $value in $spacing-values {
+  @each $attribute in $spacing-attributes {
+    .#{$attribute}-#{$size} {
+      #{$attribute}: $value;
+    }
+  }
+}
+
+/*
+ * Syntax:
+ * .min-width-s { min-width: 16px; }
+ *
+*/
+
+$size-attributes: min-width, width, max-width, min-height, height, max-height;
+
+@each $size, $value in $size-values {
+  @each $attribute in $size-attributes {
+    .#{$attribute}-#{$size} {
+      #{$attribute}: $value;
+    }
+  }
+}
+
+h3 {
+  color: $on-primary;
+  font-family: Roboto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  color: $on-primary;
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  padding: 0;
+  margin: 0;
+
+  &.bold {
+    font-weight: 700;
+  }
+}

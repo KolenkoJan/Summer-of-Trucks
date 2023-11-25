@@ -1,0 +1,22 @@
+@import "../../theme/Theme.scss";
+@import "../../theme/ThemeDefault.scss";
+
+div.icon-base {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    @each $size, $value in $size-values {
+        &-size-#{$size} {
+            border-radius: 50%;
+            width: $value;
+            height: $value;
+
+            > svg {
+                width: calc(#{$value} - 8px - (calc(#{$value} / 3.14)));
+                height: calc(#{$value} - 8px - (calc(#{$value} / 3.14)));
+            }
+        }
+    }
+}

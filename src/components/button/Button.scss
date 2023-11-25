@@ -1,0 +1,23 @@
+@import "../../theme/Theme.scss";
+
+button {
+    padding: 10px 20px;
+    font-size: $size-s;
+    font-weight: bold;
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
+    border-radius: 80px;
+
+    &.filled {
+        background-color: $primary;
+        border-color: $primary;
+        color: $on-primary;
+    }
+
+    &.outlined {
+        background-color: transparent;
+        border-color: $on-primary;
+        color: $on-primary;
+    }
+}

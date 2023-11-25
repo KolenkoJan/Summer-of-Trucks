@@ -1,0 +1,44 @@
+@import "./theme/Theme.scss";
+
+body,
+#root {
+    margin: 0;
+    padding: 0;
+    background: white;
+    color: black;
+    font-size: 14px;
+    font-family:
+        regular,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Roboto",
+        "Oxygen",
+        "Ubuntu",
+        "Cantarell",
+        "Fira Sans",
+        "Droid Sans",
+        "Helvetica Neue",
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    position: fixed;
+}
+
+.route-side-menu {
+    display: flex;
+    flex-direction: column;
+    padding: $spacing-l;
+    background-color: $surface-container-medium;
+    border-right: 1px solid $on-surface;
+}
+
+.route-admin, .route-profile {
+    background-color: $surface-container-medium;
+    width: 100%;
+    height: 100%;
+}
