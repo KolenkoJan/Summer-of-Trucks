@@ -53,6 +53,8 @@ $size-attributes: min-width, width, max-width, min-height, height, max-height;
   }
 }
 
+// Predefined text
+
 h3 {
   color: $on-primary;
   font-family: Roboto;
@@ -77,4 +79,10 @@ p {
   &.bold {
     font-weight: 700;
   }
+}
+
+// Predefined classnames
+
+.cursor-pointer {
+  cursor: pointer;
 }

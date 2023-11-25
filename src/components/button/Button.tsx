@@ -6,10 +6,12 @@ interface IButtonProps {
     onClick?: () => void
 }
 
-export const Button: React.FC<IButtonProps> = (props) => {
+export const Button: React.FC<IButtonProps> = ({ variant, onClick, children }) => {
+    const onClickClass = onClick ? "cursor-pointer" : ""
+
     return (
-        <button className={props.variant} {...props}>
-            {props.children}22
+        <button className={`${onClickClass} ${variant}`} onClick={onClick}>
+            <p>{children}</p>
         </button>
     )
 }

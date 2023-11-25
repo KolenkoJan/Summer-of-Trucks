@@ -11,7 +11,7 @@ export const AdminRoute: React.FC = observer(() => {
             <h3>H3 title</h3>
             <p>Paragraph text</p>
             <p className="bold">Paragraph text bold</p>
-            <Button>Button outlined</Button>
+            <Button onClick={() => (todosStore.toggle = !todosStore.toggle)}>Toggle {`${todosStore.toggle}`}</Button>
             <p>{JSON.stringify(todosStore.todos)}</p>
         </div>
     )
