@@ -1,1 +1,1 @@
-export * from "./ThemeTypesAndUtils"
+export * from "./ThemeTypes"

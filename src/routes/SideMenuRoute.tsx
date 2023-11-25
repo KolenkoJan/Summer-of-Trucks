@@ -1,4 +1,4 @@
-import { InovaLogoIcon } from "@src/icons"
+import { DashboardLogoIcon, InovaLogoIcon, ProfileIcon } from "@src/icons"
 import { observer } from "mobx-react-lite"
 import { useNavigate, useMatch } from "react-router-dom"
 
@@ -7,8 +7,9 @@ export const SideMenuRoute: React.FC = observer(() => {
 
     return (
         <div className="route-side-menu">
-            <InovaLogoIcon size="l" isSelected={!!useMatch("/dashboard")} onClick={() => navigate("/dashboard")} />
-            <InovaLogoIcon size="l" isSelected={!!useMatch("/profile")} onClick={() => navigate("/profile")} className="margin-top-xl" />
+            <InovaLogoIcon size="l" />
+            <DashboardLogoIcon size="l" isSelected={!!useMatch("")} onClick={() => navigate("")} />
+            <ProfileIcon size="l" isSelected={!!useMatch("/profile")} onClick={() => navigate("/profile")} className="margin-top-m" />
         </div>
     )
 })

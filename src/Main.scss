@@ -35,6 +35,10 @@ body,
     padding: $spacing-l;
     background-color: $surface-container-medium;
     border-right: 1px solid $on-surface;
+
+    > :first-child {
+        margin-bottom: 128px;
+    }
 }
 
 .route-admin, .route-profile {
