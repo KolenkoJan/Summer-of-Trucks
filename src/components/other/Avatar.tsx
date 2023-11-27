@@ -9,10 +9,15 @@ interface IAvatarProps {
     className?: string
 }
 
-export const Avatar: React.FC<IAvatarProps> = observer(({source, size, onClick, className}) => {
+export const Avatar: React.FC<IAvatarProps> = observer(({ source, size, onClick, className}) => {
     return (
-        <div>
-            
-        </div>
+        <img src={source} 
+        onClick={onClick} 
+        alt="avatar-photo" 
+        className={`${className} ${size}`}/>
     )
 })
+
+Avatar.defaultProps = {
+    size: "l",
+}
