@@ -1,5 +1,6 @@
 import { ThemeSize } from "@src/theme";
 import { observer } from "mobx-react-lite";
+import "../avatar/Avatar.scss"
 
 interface IAvatarProps {
     source: string
