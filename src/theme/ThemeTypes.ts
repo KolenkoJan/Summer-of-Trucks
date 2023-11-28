@@ -29,6 +29,8 @@ export const theme = {
         m: "m",
         l: "l",
     },
+
+    
 }
 
 export type ThemeColor = keyof typeof theme.color
