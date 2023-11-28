@@ -29,7 +29,6 @@ export const theme = {
         m: "m",
         l: "l",
     },
-
     
 }
 

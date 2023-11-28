@@ -1,5 +1,9 @@
 @import "/src/theme/Theme.scss";
 
+strong {
+    font-weight: 700;
+}
+
 .base-text {
     color: $on-primary;
     font-family: Roboto;
