@@ -1,0 +1,29 @@
+@import "/src/theme/Theme.scss";
+
+strong {
+    font-weight: 700;
+}
+
+.base-text {
+    color: $on-primary;
+    font-family: Roboto;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+
+    &.title-l {
+        font-size: 22pt;
+        line-height: 28pt;
+    }
+
+    &.body-m {
+        font-size: 14pt;
+        line-height: 20pt;
+    }
+
+    &.body-s {
+        font-size: 12pt;
+        line-height: 16pt;
+    }
+
+}
