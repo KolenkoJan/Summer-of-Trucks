@@ -10,9 +10,10 @@
     color: $on-primary;
     gap: 10px;
     border-radius: 20px;
-    border: 1px solid #FEFDFF80;
+    border: 1px solid $on-primary;
+
+    &.base-input::placeholder {
+        color: $surface-container-low;
+    }
 }
 
-.base-input::placeholder {
-    color: #FEFDFF80;
-}

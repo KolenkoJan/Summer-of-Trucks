@@ -6,7 +6,7 @@ interface ITextFieldProps {
     placeholder?: string
     value?: string
     className?: string
-    type?: string
+    type?: "text" | "number" | "date" | "file"
 }
 
 export const TextField: React.FC<ITextFieldProps> = observer(({ onChange, placeholder, value, className, type }) => {
@@ -21,6 +21,5 @@ export const TextField: React.FC<ITextFieldProps> = observer(({ onChange, placeh
 })
 
 TextField.defaultProps = {
-    placeholder: "Search",
     type: "text",
 }
