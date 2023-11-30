@@ -55,34 +55,6 @@ $size-attributes: min-width, width, max-width, min-height, height, max-height;
 
 // Predefined text
 
-h3 {
-  color: $on-primary;
-  font-family: Roboto;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 24px;
-  padding: 0;
-  margin: 0;
-}
-
-p {
-  color: $on-primary;
-  font-family: Roboto;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 16px;
-  padding: 0;
-  margin: 0;
-}
-
-strong p, strong h3 {
-  font-weight: 700;
-}
-
-// Predefined classnames
-
 .cursor-pointer {
   cursor: pointer;
 }

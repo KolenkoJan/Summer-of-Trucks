@@ -1,5 +1,5 @@
-import { ThemeSize } from "@src/theme";
-import { observer } from "mobx-react-lite";
+import { ThemeSize } from "@src/theme"
+import { observer } from "mobx-react-lite"
 import "./Avatar.scss"
 
 interface IAvatarProps {
@@ -9,13 +9,8 @@ interface IAvatarProps {
     className?: string
 }
 
-export const Avatar: React.FC<IAvatarProps> = observer(({ source, size, onClick, className}) => {
-    return (
-        <img 
-        src={source} 
-        onClick={onClick} 
-        className={`avatar width-${size} height-${size} ${className}`}/>
-    )
+export const Avatar: React.FC<IAvatarProps> = observer(({ source, size, onClick, className }) => {
+    return <img src={source} onClick={onClick} className={`avatar width-${size} height-${size} ${className}`} />
 })
 
 Avatar.defaultProps = {

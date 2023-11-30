@@ -1,23 +1,16 @@
 @import "../../theme/Theme.scss";
 
 button {
-    padding: 10px 20px;
-    font-size: $size-s;
-    font-weight: bold;
-    border-width: 1px;
-    border-style: solid;
+    padding: 6px 16px;
+    border: 1px solid $primary-main;
+    border-radius: $border-radius;
+    background-color: $primary-main;
+    color: $on-primary;
+    transition: all 0.3s ease-in-out;
     cursor: pointer;
-    border-radius: 80px;
 
-    &.filled {
-        background-color: $primary;
-        border-color: $primary;
-        color: $on-primary;
-    }
-
-    &.outlined {
-        background-color: transparent;
-        border-color: $on-primary;
-        color: $on-primary;
+    &:hover {
+        background-color: $primary-dark;
+        border-color: $primary-dark;
     }
 }

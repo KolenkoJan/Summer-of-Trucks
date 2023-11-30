@@ -1,4 +1,4 @@
-import { ThemeSize, theme } from "../../theme"
+import { ThemeSize } from "../../theme"
 import "./IconBase.scss"
 
 export interface IIconBaseProps {
@@ -10,7 +10,7 @@ export interface IIconBaseProps {
 }
 
 export const IconBase: React.FC<IIconBaseProps> = ({ size, isSelected, className, onClick, children }) => {
-    const colorClass = isSelected ? `background-color-${theme.color.onPrimaryContainer}` : ""
+    const colorClass = isSelected ? `background-color-grey-300` : ""
     const onClickClass = onClick ? "cursor-pointer" : ""
 
     return (
