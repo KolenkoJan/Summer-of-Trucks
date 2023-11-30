@@ -25,10 +25,10 @@ export const AdminRoute: React.FC = observer(() => {
             <Text variant="title-l"><strong>Title-l</strong></Text>
             <Text variant="body-m"><strong>Body-m</strong></Text>
             <Text variant="body-s">Body-s</Text>
-            <TextField onChange={(value) => console.log(value)} placeholder="Enter number" type="number"/>
-            <TextField onChange={(value) => console.log(value)} placeholder="Search"/>
-            <TextField onChange={(value => console.log(value))} type="date"/>
-            <TextField type="file"/>
+            <TextField onChange={(value) => console.log(value)} placeholder="Enter number" type="number" />
+            <TextField onChange={(value) => console.log(value)} placeholder="Search" type="text" />
+            <TextField onChange={((value) => console.log(value))} type="date" />
+            <TextField type="file" />
         </div>
     )
 })
