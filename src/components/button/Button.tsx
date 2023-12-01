@@ -1,21 +1,19 @@
+import { Text } from "../typography/Text"
 import "./Button.scss"
 
 interface IButtonProps {
-    variant?: "filled" | "outlined"
     children: React.ReactNode
     onClick?: () => void
 }
 
-export const Button: React.FC<IButtonProps> = ({ variant, onClick, children }) => {
+export const Button: React.FC<IButtonProps> = ({ onClick, children }) => {
     const onClickClass = onClick ? "cursor-pointer" : ""
 
     return (
-        <button className={`${onClickClass} ${variant}`} onClick={onClick}>
-            <p>{children}</p>
+        <button className={`${onClickClass}`} onClick={onClick}>
+            <Text variant="body-m" color="on-primary">
+                {children}
+            </Text>
         </button>
     )
-}
-
-Button.defaultProps = {
-    variant: "outlined",
 }

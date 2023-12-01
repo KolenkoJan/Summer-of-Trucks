@@ -1,11 +1,16 @@
 @import "./theme/Theme.scss";
 
+* {
+    padding: 0;
+    margin: 0;
+}
+
 body,
 #root {
+    background-color: $paper;
     margin: 0;
     padding: 0;
-    background: white;
-    color: black;
+    background:$paper;
     font-size: 14px;
     font-family:
         regular,
@@ -26,15 +31,13 @@ body,
     height: 100%;
     display: flex;
     position: relative;
-    position: fixed;
 }
 
 .route-side-menu {
     display: flex;
     flex-direction: column;
     padding: $spacing-l;
-    background-color: $surface-container-medium;
-    border-right: 1px solid $on-surface;
+    border-right: 1px solid $divider;
 
     > :first-child {
         margin-bottom: 128px;
@@ -42,7 +45,11 @@ body,
 }
 
 .route-admin, .route-profile {
-    background-color: $surface-container-medium;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
     width: 100%;
     height: 100%;
+    align-items: flex-start;
 }

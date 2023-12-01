@@ -5,16 +5,22 @@ div.icon-base {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 4px;
+    transition: all 0.3 ease-in-out;
+
+    &:hover {
+        background-color: $grey-100;
+    }
 
     @each $size, $value in $size-values {
         &-size-#{$size} {
-            border-radius: 50%;
+            border-radius: $border-radius;
             width: $value;
             height: $value;
 
             > svg {
-                width: calc(#{$value} - 8px - (calc(#{$value} / 3.14)));
-                height: calc(#{$value} - 8px - (calc(#{$value} / 3.14)));
+                width: calc(#{$value} - 8px);
+                height: calc(#{$value} - 8px);
             }
         }
     }
