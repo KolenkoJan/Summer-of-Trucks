@@ -4,9 +4,9 @@
     display: flex;
     padding: $spacing-l $spacing-m;
     color: $text-primary;
-    font-size: 14pt;
-    line-height: 20pt;
-    border-radius: 5px;
+    font-size: 14px;
+    line-height: 20px;
+    border-radius: $border-radius;
     border: 1px solid $text-secondary;
     outline: none;
     transition: $animation-1;
