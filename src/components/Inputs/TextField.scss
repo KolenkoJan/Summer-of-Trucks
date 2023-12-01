@@ -1,0 +1,19 @@
+@import "/src/theme/Theme.scss";
+
+.base-input {
+    display: flex;
+    outline: none;
+    width: 256px;
+    padding: 9px 17px;
+    align-items: flex-start;
+    background-color: $paper;
+    color: $text-primary;
+    gap: 10px;
+    border-radius: 20px;
+    border: 1px solid $grey-900;
+
+    &::placeholder {
+        color: $text-primary
+    }
+}
+
