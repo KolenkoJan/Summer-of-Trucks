@@ -19,6 +19,7 @@ export const AdminRoute: React.FC = observer(() => {
             <TextField onChange={(value) => console.log(value)} placeholder="Enter number" type="number" />
             <TextField onChange={(value) => console.log(value)} placeholder="Search" type="text" />
             <TextField onChange={(value) => console.log(value)} type="date" />
+            <TextField onChange={(value) => console.log(value)} type="text" placeholder="Outlined" />
         </div>
     )
 })

@@ -2,18 +2,24 @@
 
 .base-input {
     display: flex;
-    outline: none;
-    width: 256px;
-    padding: 9px 17px;
-    align-items: flex-start;
-    background-color: $paper;
+    padding: $spacing-l $spacing-m;
     color: $text-primary;
-    gap: 10px;
-    border-radius: 20px;
-    border: 1px solid $grey-900;
+    font-size: 14pt;
+    line-height: 20pt;
+    border-radius: 5px;
+    border: 1px solid $text-secondary;
+    outline: none;
+    transition: $animation-1;
 
     &::placeholder {
-        color: $text-primary
+        color: $text-secondary;
+    }
+
+    &:hover {
+        border-color: $grey-900;
+    }
+
+    &:focus {
+        border-color: $primary-main;
     }
 }
-
