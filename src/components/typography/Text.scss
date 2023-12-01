@@ -1,13 +1,9 @@
 @import "/src/theme/Theme.scss";
 
-strong {
-    font-weight: 700;
-}
 
 .base-text {
     color: $text-primary;
     font-family: Roboto;
-    font-weight: 400;
     margin: 0;
     padding: 0;
 
@@ -26,4 +22,7 @@ strong {
         line-height: 16px;
     }
 
+    strong {
+        font-weight: 600;
+    }
 }

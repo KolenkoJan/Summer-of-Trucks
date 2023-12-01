@@ -10,7 +10,7 @@ export interface IIconBaseProps {
 }
 
 export const IconBase: React.FC<IIconBaseProps> = ({ size, isSelected, className, onClick, children }) => {
-    const colorClass = isSelected ? `background-color-grey-300` : ""
+    const colorClass = isSelected ? `background-color-grey-200` : ""
     const onClickClass = onClick ? "cursor-pointer" : ""
 
     return (

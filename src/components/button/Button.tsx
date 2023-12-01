@@ -12,7 +12,7 @@ export const Button: React.FC<IButtonProps> = ({ onClick, children }) => {
     return (
         <button className={`${onClickClass}`} onClick={onClick}>
             <Text variant="body-m" color="on-primary">
-                <strong>{children}</strong>
+                {children}
             </Text>
         </button>
     )
