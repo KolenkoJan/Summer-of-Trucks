@@ -3,6 +3,7 @@ import { Button } from "../components"
 import { Avatar } from "@src/components/avatar/Avatar"
 import { Text } from "@src/components/typography/Text"
 import { TextField } from "@src/components/Inputs/TextField"
+import { CheckBox } from "../components/Inputs/checkbox/CheckBox"
 
 export const AdminRoute: React.FC = observer(() => {
     return (
@@ -20,6 +21,7 @@ export const AdminRoute: React.FC = observer(() => {
             <TextField onChange={(value) => console.log(value)} placeholder="Search" type="text" />
             <TextField onChange={(value) => console.log(value)} type="date" />
             <TextField onChange={(value) => console.log(value)} type="text" placeholder="Outlined" />
+            <CheckBox label="Label" />
         </div>
     )
 })
