@@ -1,4 +1,4 @@
-import "../Inputs/TextField.scss"
+import "../textField/TextField.scss"
 
 type TextFieldType = "text" | "number" | "date" | "file"
 

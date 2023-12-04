@@ -2,12 +2,14 @@ import { observer } from "mobx-react-lite"
 import { Button } from "../components"
 import { Text } from "../components/typography/Text"
 import { CheckBox } from "../components/Inputs/checkbox/CheckBox"
-import { TextField } from "../components/Inputs/TextField"
+import { TextField } from "../components/Inputs/textField/TextField"
 import { Avatar } from "../components/avatar/Avatar"
 import { useState } from "react"
+import { Switch } from "../components/Inputs/switch/Switch"
 
 export const AdminRoute: React.FC = observer(() => {
     const [checked, setChecked] = useState<boolean>(false)
+    const [checkedSwitch, isCheckedSwitch] = useState<boolean>(false)
 
     return (
         <div className="route-admin">
@@ -31,6 +33,7 @@ export const AdminRoute: React.FC = observer(() => {
                 }}
                 isChecked={checked}
             />
+            <Switch label="test" onChange={(isChecked) => isCheckedSwitch(isChecked)} isChecked={checkedSwitch} />
         </div>
     )
 })
