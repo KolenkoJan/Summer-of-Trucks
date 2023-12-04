@@ -32,24 +32,24 @@
     .circle {
         position: absolute;
         top: 50%;
-        transform: translateY(-50%);
-        left: -10px;
+        left: 50%;
+        transform: translate(-50%, -50%); 
         height: 40px;
         width: 40px;
         border-radius: 50%;
-        background-color: gray;
+        background-color: $grey-900;
         opacity: 0;
 
         &:hover {
-            opacity: 0.1;
+            opacity: 5%;
         }
     }
 
     input:checked ~ .checkmark {
         background-color: $primary-main;
-        border: none;
-        height: 24px;
-        width: 24px;
+        border-color: transparent;
+        height: 20px;
+        width: 20px;
         left: 0;
         background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>');
     }

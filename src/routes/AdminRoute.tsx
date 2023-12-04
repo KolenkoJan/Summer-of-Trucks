@@ -4,8 +4,12 @@ import { Avatar } from "@src/components/avatar/Avatar"
 import { Text } from "@src/components/typography/Text"
 import { TextField } from "@src/components/Inputs/TextField"
 import { CheckBox } from "../components/Inputs/checkbox/CheckBox"
+import { useState } from "react"
 
 export const AdminRoute: React.FC = observer(() => {
+
+    const [checked, setChecked] = useState<boolean>(false)
+
     return (
         <div className="route-admin">
             <Text variant="title-l">
@@ -21,7 +25,7 @@ export const AdminRoute: React.FC = observer(() => {
             <TextField onChange={(value) => console.log(value)} placeholder="Search" type="text" />
             <TextField onChange={(value) => console.log(value)} type="date" />
             <TextField onChange={(value) => console.log(value)} type="text" placeholder="Outlined" />
-            <CheckBox label="Label" />
+            <CheckBox label="Label" onChange={(newState: boolean) => {setChecked(newState)}} isChecked={checked}/>
         </div>
     )
 })
