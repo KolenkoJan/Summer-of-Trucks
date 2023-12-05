@@ -9,14 +9,12 @@ interface ISwitchProps {
 
 export const Switch: React.FC<ISwitchProps> = ({ label, isChecked, onChange }) => {
     return (
-        <div className="switch-input base-text body-m">
-            <label className="switch">
-                <input type="checkbox" checked={isChecked} onChange={(e) => onChange && onChange(e.target.checked)} />
-                <span className="slider round">
-                    <div className="circle"></div>
-                </span>
-            </label>
-            <span>{label}</span>
-        </div>
+        <label className="switch">
+            <input type="checkbox" checked={isChecked} onChange={(e) => onChange && onChange(e.target.checked)} />
+            <span className="slider round">
+                <div className="circle"></div>
+            </span>
+            <span className="label-text">{label}</span>
+        </label>
     )
 }

@@ -33,7 +33,7 @@ export const AdminRoute: React.FC = observer(() => {
                 }}
                 isChecked={checked}
             />
-            <Switch label="test" onChange={(isChecked) => isCheckedSwitch(isChecked)} isChecked={checkedSwitch} />
+            <Switch label="Test1" onChange={(isChecked) => isCheckedSwitch(isChecked)} isChecked={checkedSwitch} />
         </div>
     )
 })

@@ -1,98 +1,91 @@
 @import "../../../theme/Theme.scss";
 
-.switch-input {
-    display: flex;
-    width: 70px;
-    justify-content: space-between;
-}
-
-
 .switch {
-  position: relative;
-  display: inline-block;
-  width: 35px;
-  height: 34px;
-}
+    position: relative;
+    display: inline-block;
+    width: 35px;
+    height: 34px;
 
+    .label-text {
+        position: absolute;
+        left: 45px;
+        top: 1px;
+        cursor: pointer;
+    }
 
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+    input {
+        opacity: 0;
+        width: 0;
+        height: 0;
 
+        &:checked+.slider {
+            background-color: $primary-light;
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: $grey-400;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+            .circle {
+                transform: translate(25px, 0px); // Adjust the vertical position as needed
+                background-color: $primary-main;
+                box-shadow: none;
+            }
+        }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 25px;
-  width: 25px;
-  left: -8px;
-  bottom: -2px;
-  background-color: $grey-100;
-  -webkit-transition: .4s;
-  transition: .4s;
-  box-shadow: 0 1px 1px rgb(157, 157, 157);
-}
+        &:checked+.slider:before {
+            -webkit-transform: translateX(25px);
+            -ms-transform: translateX(25px);
+            transform: translateX(25px);
+            background-color: $primary-main;
+            box-shadow: none;
+        }
+    }
 
-// circle on hover still in progress
- /*
-  .circle::before {
-  position: absolute;
-  content: "";
-  height: 30px;
-  width: 30px;
-  left: -8px;
-  bottom: -4px;
-  background-color: $grey-100;
-  -webkit-transition: .4s;
-  transition: .4s;
-  border-radius: 50%;
-  opacity: 50%;
-}
-*/
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: $grey-400;
+        -webkit-transition: $animation-1;
+        transition: $animation-1;
 
+        &:before {
+            position: absolute;
+            content: "";
+            height: 25px;
+            width: 25px;
+            left: -8px;
+            bottom: -2px;
+            background-color: $grey-100;
+            -webkit-transition: $animation-1;
+            transition: $animation-1;
+            box-shadow: 0 1px 1px rgb(157, 157, 157);
+        }
 
-input:checked + .slider {
-  background-color: $primary-light;
-}
+        .circle {
+            position: absolute;
+            content: "";
+            height: 37px;
+            width: 37px;
+            left: -14px;
+            bottom: -8px;
+            background-color: $grey-900;
+            -webkit-transition: $animation-1;
+            transition: $animation-1;
+            border-radius: 50%;
+            opacity: 0%;
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(25px);
-  -ms-transform: translateX(25px);
-  transform: translateX(25px);
-  background-color: $primary-main;
-  box-shadow: none;
-}
+            &:hover {
+                opacity: 5%;
+            }
+        }
+    }
 
-//still in progress
-/*
-  input:checked + .circle:before {
-  -webkit-transform: translateX(25px);
-  -ms-transform: translateX(25px);
-  transform: translateX(25px);
-  background-color: $primary-main;
-  box-shadow: none;
-}
-*/
+    .round {
+        border-radius: 34px;
+        height: 20px;
 
-.slider.round {
-  border-radius: 34px;
-  height: 20px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
+        &:before {
+            border-radius: 50%;
+        }
+    }
 }
