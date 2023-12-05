@@ -4,11 +4,11 @@
     position: relative;
     display: inline-block;
     width: 35px;
-    height: 34px;
+    height: 0px;
 
     .label-text {
         position: absolute;
-        left: 45px;
+        left: 55px;
         top: 1px;
         cursor: pointer;
     }
@@ -20,23 +20,24 @@
 
         &:checked+.slider {
             background-color: $primary-light;
+            opacity: 1;
 
             .circle {
-                transform: translate(25px, 0px); // Adjust the vertical position as needed
+                transform: translate(30px, 0);
                 background-color: $primary-main;
                 box-shadow: none;
             }
-        }
 
-        &:checked+.slider:before {
-            -webkit-transform: translateX(25px);
-            -ms-transform: translateX(25px);
-            transform: translateX(25px);
-            background-color: $primary-main;
-            box-shadow: none;
+            &:before {
+                transform: translateX(30px);
+                background-color: $primary-main;
+                opacity: 1;
+                box-shadow: 0 1px 1px rgb(157, 157, 157);
+            }
         }
     }
 
+    //not checked switch slider 
     .slider {
         position: absolute;
         cursor: pointer;
@@ -44,30 +45,35 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: $grey-400;
+        width: 39px;
+        background-color: $grey-900;
+        opacity: 0.5;
         -webkit-transition: $animation-1;
         transition: $animation-1;
 
+        //not checked switch button
         &:before {
             position: absolute;
             content: "";
             height: 25px;
             width: 25px;
             left: -8px;
-            bottom: -2px;
+            top: -3.5px;
             background-color: $grey-100;
+            opacity: 1;
             -webkit-transition: $animation-1;
             transition: $animation-1;
-            box-shadow: 0 1px 1px rgb(157, 157, 157);
+            box-shadow: 0 1px 1px rgb(48, 48, 48);
         }
 
+        //not checked button circle 
         .circle {
             position: absolute;
             content: "";
-            height: 37px;
-            width: 37px;
-            left: -14px;
-            bottom: -8px;
+            height: 40px;
+            width: 40px;
+            left: -15.5px;
+            bottom: -11px;
             background-color: $grey-900;
             -webkit-transition: $animation-1;
             transition: $animation-1;
@@ -75,14 +81,14 @@
             opacity: 0%;
 
             &:hover {
-                opacity: 5%;
+                opacity: 8%;
             }
         }
     }
 
     .round {
         border-radius: 34px;
-        height: 20px;
+        height: 18px;
 
         &:before {
             border-radius: 50%;

@@ -14,7 +14,7 @@ export const Switch: React.FC<ISwitchProps> = ({ label, isChecked, onChange }) =
             <span className="slider round">
                 <div className="circle"></div>
             </span>
-            <span className="label-text">{label}</span>
+            <span className="label-text base-text body-m">{label}</span>
         </label>
     )
 }
