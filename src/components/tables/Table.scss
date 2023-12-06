@@ -1,0 +1,33 @@
+@import "../../theme/Theme.scss";
+
+.table {
+    display: table;
+    min-width: 650px;
+    border-collapse: collapse;
+    border-radius: $border-radius;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+
+    tr {
+        border-bottom: 1px solid $grey-400;
+
+        th {
+            &:first-child {
+                text-align: left;
+            }
+
+            font-weight: 500;
+            padding: 16px;
+            vertical-align: middle;
+            text-align: right;
+        }
+        td {
+            &:first-child {
+                text-align: left;
+            }
+
+            padding: 16px;
+            vertical-align: middle;
+            text-align: right;
+        }
+    }
+}

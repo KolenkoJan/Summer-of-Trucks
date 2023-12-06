@@ -6,6 +6,7 @@ import { TextField } from "../components/Inputs/textField/TextField"
 import { Avatar } from "../components/avatar/Avatar"
 import { useState } from "react"
 import { Switch } from "../components/Inputs/switch/Switch"
+import { Table } from "../components/tables/Table"
 
 export const AdminRoute: React.FC = observer(() => {
     const [checked, setChecked] = useState<boolean>(false)
@@ -34,6 +35,50 @@ export const AdminRoute: React.FC = observer(() => {
                 isChecked={checked}
             />
             <Switch label="Required" onChange={(isChecked) => isCheckedSwitch(isChecked)} isChecked={checkedSwitch} />
+            <Table>
+                <tr>
+                    <th>Dessert (100g serving)</th>
+                    <th>Calories</th>
+                    <th>Fat(g)</th>
+                    <th>Carbs(g)</th>
+                    <th>Protein(g)</th>
+                </tr>
+                <tr>
+                    <td>Frozen yoghurt</td>
+                    <td>159</td>
+                    <td>6</td>
+                    <td>24</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>Ice cream sandwich</td>
+                    <td>237</td>
+                    <td>9</td>
+                    <td>37</td>
+                    <td>4.3</td>
+                </tr>
+                <tr>
+                    <td>Eclair</td>
+                    <td>262</td>
+                    <td>16</td>
+                    <td>24</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>Cupcake</td>
+                    <td>305</td>
+                    <td>3.7</td>
+                    <td>67</td>
+                    <td>4.3</td>
+                </tr>
+                <tr>
+                    <td>Gingerbread</td>
+                    <td>356</td>
+                    <td>16</td>
+                    <td>49</td>
+                    <td>3.9</td>
+                </tr>
+            </Table>
         </div>
     )
 })
