@@ -3,7 +3,7 @@
 .container {
     display: block;
     position: relative;
-    padding-left: 35px;
+    padding-left: 30px;
     margin-bottom: 12px;
     cursor: pointer;
     font-size: 22px;
@@ -22,10 +22,10 @@
         top: 50%;
         transform: translateY(-50%);
         left: 0;
-        height: 20px;
-        width: 20px;
+        height: 14px;
+        width: 14px;
         background-color: #fff;
-        border: 2px solid $grey-400;
+        border: 2px solid rgba($grey-900,0.7);
         border-radius: $border-radius;
     }
 
@@ -34,10 +34,10 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%); 
-        height: 40px;
-        width: 40px;
+        height: 42px;
+        width: 42px;
         border-radius: 50%;
-        background-color: $grey-900;
+        background-color: $primary-main;
         opacity: 0;
 
         &:hover {
@@ -48,8 +48,8 @@
     input:checked ~ .checkmark {
         background-color: $primary-main;
         border-color: transparent;
-        height: 20px;
-        width: 20px;
+        height: 14px;
+        width: 14px;
         left: 0;
         background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>');
     }

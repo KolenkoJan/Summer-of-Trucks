@@ -4,10 +4,10 @@
     display: flex;
     padding: $spacing-l $spacing-m;
     color: $text-primary;
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 16px;
+    line-height: 23px;
     border-radius: $border-radius;
-    border: 1px solid $text-secondary;
+    border: 1px solid rgba($grey-900, 0.3);
     outline: none;
     transition: $animation-1;
 
@@ -20,6 +20,6 @@
     }
 
     &:focus {
-        border-color: $primary-main;
+        border: 1px solid $primary-main;
     }
 }
