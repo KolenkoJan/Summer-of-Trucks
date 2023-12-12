@@ -1,4 +1,4 @@
-import { ThemeSize } from "@src/theme"
+import { ThemeSize } from "../../theme/ThemeTypes"
 import { observer } from "mobx-react-lite"
 import "./Avatar.scss"
 
