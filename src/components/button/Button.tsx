@@ -9,11 +9,10 @@ interface IButtonProps {
 
 export const Button: React.FC<IButtonProps> = ({ onClick, children, leftIcon }) => {
     const onClickClass = onClick ? "cursor-pointer" : ""
-    const leftIconClass = leftIcon ? "left-icon" : ""
 
     return (
         <button className={`${onClickClass}`} onClick={onClick}>
-            {leftIcon && <div className={`${leftIconClass}`}>{leftIcon}</div>}
+            {leftIcon && <div className="left-icon">{leftIcon}</div>}
             <Text variant="body-m" color="on-primary">
                 {children}
             </Text>

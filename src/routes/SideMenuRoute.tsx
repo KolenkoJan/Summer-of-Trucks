@@ -1,4 +1,4 @@
-import { DashboardLogoIcon, InovaLogoIcon, ProfileIcon } from "@src/icons"
+import { DashboardLogoIcon, InovaLogoIcon, ProfileIcon } from "../icons"
 import { observer } from "mobx-react-lite"
 import { useNavigate, useMatch } from "react-router-dom"
 
