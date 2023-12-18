@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite"
 import "./Header.scss"
 import { Button } from "../button/Button"
-import { useState } from "react"
 
 interface IHeaderProps {
     isSideMenuVisible?: () => void
