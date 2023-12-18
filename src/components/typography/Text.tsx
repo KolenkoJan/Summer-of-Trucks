@@ -7,6 +7,7 @@ interface ITextProps {
     variant?: "title-l" | "body-s" | "body-m"
     color?: ThemeColor
     className?: string
+    isSelected?: boolean
 }
 
 export const Text: React.FC<ITextProps> = ({ children, color, variant, className }) => {

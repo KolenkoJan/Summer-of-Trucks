@@ -1,0 +1,13 @@
+@import "../../theme/Theme.scss";
+
+.header {
+    display: flex;
+    border-bottom: 1px solid $grey-400;
+    padding: 16px;
+}
+
+@media screen and (max-width: 1200px) {
+    .header {
+        display: flex;
+    }
+}

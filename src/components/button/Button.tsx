@@ -2,20 +2,24 @@ import { Text } from "../typography/Text"
 import "./Button.scss"
 
 interface IButtonProps {
-    children: React.ReactNode
+    children?: React.ReactNode
     onClick?: () => void
     leftIcon?: React.ReactNode
+    className?: string
 }
 
-export const Button: React.FC<IButtonProps> = ({ onClick, children, leftIcon }) => {
+export const Button: React.FC<IButtonProps> = ({ onClick, children, leftIcon, className }) => {
     const onClickClass = onClick ? "cursor-pointer" : ""
+    const hasLeftIcon = !!leftIcon
 
     return (
-        <button className={`${onClickClass}`} onClick={onClick}>
+        <button className={`${onClickClass} ${className}`} onClick={onClick}>
             {leftIcon && <div className="left-icon">{leftIcon}</div>}
-            <Text variant="body-m" color="on-primary">
-                {children}
-            </Text>
+            {children && (
+                <Text variant="body-m" color="on-primary" className={hasLeftIcon ? "children-margin" : ""}>
+                    {children}
+                </Text>
+            )}
         </button>
     )
 }

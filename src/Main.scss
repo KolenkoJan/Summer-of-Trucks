@@ -30,6 +30,7 @@ body,
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     position: relative;
 }
 
@@ -52,4 +53,8 @@ body,
     width: 100%;
     height: 100%;
     align-items: flex-start;
+}
+
+.flex-layout {
+    display: flex;
 }

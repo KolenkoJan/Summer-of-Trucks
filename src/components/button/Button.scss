@@ -11,20 +11,57 @@ button {
     transition: all 0.3s ease-in-out;
     cursor: pointer;
     font-weight: 500;
-    
+
     &:hover {
         background-color: $primary-dark;
         border-color: $primary-dark;
     }
 
     .left-icon {
-        margin-right: 8px;
-        margin-left: -4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 20px;
         height: 20px;
         max-width: 20px;
         max-height: 20px;
     }
 
+    .children-margin {
+        margin-left: 8px;
+    }
+
 }
 
+.menu-button {
+    display: none;
+    background-color: transparent;
+    vertical-align: middle;
+    align-items: center;
+    height: 34px;
+    width: 34px;
+    border: 1px solid rgb(218, 226, 237);
+    color: rgb(0, 127, 255);
+    text-align: center;
+    padding: 8px;
+    overflow: visible;
+    box-sizing: border-box;
+    border-radius: 12px;
+    box-shadow: rgb(243, 246, 249) 0px 1px 2px inset, rgba(229, 234, 242, 0.6) 0px 1px 0.5px;
+
+    &:hover {
+        border-color: rgb(199, 208, 221);
+        background: rgb(243, 246, 249);
+    }
+
+    svg {
+        height: 16px;
+        width: 16px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .menu-button {
+        display: flex;
+    }
+}
