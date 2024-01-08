@@ -11,19 +11,18 @@ export const AppRoute = () => {
     const toggleSideMenu = () => {
         setIsSideMenuVisible(!isSideMenuVisible)
     }
+
     const router = createBrowserRouter([
         {
             path: "",
             element: (
-                <>
-                    <div>
-                        <Header isSideMenuVisible={toggleSideMenu} />
-                    </div>
-                    <div className="flex-layout">
+                <div className="flex-container">
+                    <Header isSideMenuVisible={toggleSideMenu} />
+                    <div className="flex">
                         <SideMenu isSideMenuVisible={isSideMenuVisible} />
                         <Outlet />
                     </div>
-                </>
+                </div>
             ),
             children: [
                 {
@@ -37,5 +36,6 @@ export const AppRoute = () => {
             ],
         },
     ])
+
     return <RouterProvider router={router} />
 }

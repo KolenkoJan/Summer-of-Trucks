@@ -2,12 +2,22 @@
 
 .header {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $paper;
     border-bottom: 1px solid $grey-400;
     padding: 16px;
+    overflow: auto;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (min-width: 1200px) {
+    .button-icon.hidden {
+        display: none;
+    }
+
     .header {
         display: flex;
+        justify-content: end;
     }
+
 }

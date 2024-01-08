@@ -9,30 +9,27 @@ interface ISideMenuProps {
 
 export const SideMenu: React.FC<ISideMenuProps> = observer(({ isSideMenuVisible }) => {
     const navigate = useNavigate()
+    const isSideMenuVisibleClass = isSideMenuVisible ? "visible" : "hidden"
 
     return (
-        isSideMenuVisible && (
-            <div>
-                <div className="side-menu">
-                    <ul className="list-items">
-                        <li>
-                            <a>
-                                <Text variant="body-s">Dashboard</Text>
-                            </a>
-                        </li>
-                        <li>
-                            <a onClick={() => navigate("")}>
-                                <Text variant="body-s">Admin</Text>
-                            </a>
-                        </li>
-                        <li>
-                            <a onClick={() => navigate("/profile")}>
-                                <Text variant="body-s">Profile</Text>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        )
+        <div className={`side-menu ${isSideMenuVisibleClass}`}>
+            <ul className="list-items">
+                <li>
+                    <a>
+                        <Text variant="body-s">Dashboard</Text>
+                    </a>
+                </li>
+                <li>
+                    <a onClick={() => navigate("")}>
+                        <Text variant="body-s">Admin</Text>
+                    </a>
+                </li>
+                <li>
+                    <a onClick={() => navigate("/profile")}>
+                        <Text variant="body-s">Profile</Text>
+                    </a>
+                </li>
+            </ul>
+        </div>
     )
 })

@@ -1,5 +1,5 @@
 import React from "react"
-import { IIconBaseProps, IconBase } from "@src/components"
+import { IIconBaseProps, IconBase } from "../components/icon-base/IconBase"
 import { theme } from "../theme"
 
 export const DashboardLogoIcon: React.FC<IIconBaseProps> = (props) => {

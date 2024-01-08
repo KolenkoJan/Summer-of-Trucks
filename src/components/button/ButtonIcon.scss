@@ -1,0 +1,21 @@
+.button-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 34px;
+    width: 34px;
+    padding: 8px;
+    border: 1px solid rgb(218, 226, 237);
+    background-color: transparent;
+    color: rgb(0, 127, 255);
+    border-radius: 12px;
+    box-shadow: rgb(243, 246, 249) 0px 1px 2px inset, rgba(229, 234, 242, 0.6) 0px 1px 0.5px;
+
+
+
+
+    &:hover {
+        border-color: rgb(199, 208, 221);
+        background: rgb(243, 246, 249);
+    }
+}
