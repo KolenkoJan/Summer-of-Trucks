@@ -20,12 +20,12 @@ export const SideMenu: React.FC<ISideMenuProps> = observer(({ isSideMenuVisible 
                     </a>
                 </li>
                 <li>
-                    <a onClick={() => navigate("")}>
+                    <a onClick={() => navigate("/home")}>
                         <Text variant="body-s">Admin</Text>
                     </a>
                 </li>
                 <li>
-                    <a onClick={() => navigate("/profile")}>
+                    <a onClick={() => navigate("/home/profile")}>
                         <Text variant="body-s">Profile</Text>
                     </a>
                 </li>

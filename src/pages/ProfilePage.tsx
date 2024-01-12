@@ -1,12 +1,22 @@
-import { Button } from "../components"
+import { observer } from "mobx-react-lite"
 import { Card } from "../components/cards/Card"
+import { InovaLogoIcon } from "../icons/InovaLogoIcon"
+import { Button } from "../components/button/Button"
 import { Text } from "../components/typography/Text"
-import { InovaLogoIcon } from "../icons"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { url } from "inspector"
+import { AuthService } from "../services"
 
-export const ProfileRoute: React.FC = () => {
+interface IProfilePageProps {
+    onClick?: () => void
+}
+
+export const ProfilePage: React.FC<IProfilePageProps> = observer(({ onClick }) => {
+    const navigate = useNavigate()
+
     return (
-        <div className="route-profile">
-            <h3>Profile route</h3>
+        <div className="profile-page">
             <Card>
                 <div className="flex-card">
                     <div className="center-content">
@@ -14,8 +24,12 @@ export const ProfileRoute: React.FC = () => {
                         <h1 className="text-size">PARKPLAC POLETJE</h1>
                     </div>
                     <div className="bottom-content">
-                        <Text> Vpišite se z računom google</Text>
+                        <Text>Vpišite se z računom google</Text>
                         <Button
+                            onClick={() => {
+                                AuthService.isLoggedIn != AuthService.isLoggedIn
+                                navigate("/home")
+                            }}
                             className="profile-button"
                             leftIcon={
                                 <svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="-3 0 262 262" preserveAspectRatio="xMidYMid">
@@ -38,7 +52,6 @@ export const ProfileRoute: React.FC = () => {
                                 </svg>
                             }
                         >
-                            {" "}
                             Vpiši se
                         </Button>
                     </div>
@@ -46,4 +59,4 @@ export const ProfileRoute: React.FC = () => {
             </Card>
         </div>
     )
-}
+})
