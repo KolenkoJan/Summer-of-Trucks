@@ -1,20 +1,15 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, type NavLinkProps } from "react-router-dom"
 import { Text } from "../../components/typography/Text"
-import { ThemeColor } from "../../theme"
+import "../../routes/menus/SideMenu.scss"
 
-interface ISideMenuNavLinkProps {
+interface ISideMenuNavLinkProps extends NavLinkProps {
     children?: React.ReactNode
-    className?: string
-    textClassName?: string
-    variant?: "title-l" | "body-s" | "body-m"
-    color?: ThemeColor
-    to: string
 }
 
-export const SideMenuNavLink: React.FC<ISideMenuNavLinkProps> = ({ textClassName, children, to, className, variant, color }) => {
+export const SideMenuNavLink: React.FC<ISideMenuNavLinkProps> = ({ children, ...rest }) => {
     return (
-        <NavLink to={to} className={className}>
-            <Text variant={variant} color={color} className={textClassName}>
+        <NavLink {...rest}>
+            <Text variant="body-s" color="text-secondary" className="text-hover">
                 {children}
             </Text>
         </NavLink>
