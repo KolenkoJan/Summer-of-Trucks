@@ -17,7 +17,7 @@
 
         li {
             display: block;
-            padding: 8px 10px 0px 10px;
+            padding: 0px 8px;
 
             a {
                 display: flex;
@@ -27,19 +27,33 @@
                 text-decoration: none;
                 font-weight: 600;
                 transition: $animation-2;
+                border-left: 1px solid $grey-400;
+            
 
                 &:hover {
                     background-color: $grey-100;
                     border-radius: $border-radius;
+                    border-top-left-radius: 0px;
+                    border-bottom-left-radius: 0px;
                     cursor: pointer;
+
+                    .text-hover {
+                        transition: $animation-2;
+                        color: $text-primary;
+                    }
                 }
 
                 &:focus {
-                    background-color: $primary-light;
-                }
+                    background-color: rgba($primary-light, .1);
+                    border-radius: $border-radius;
+                    border-left: 1px solid $primary-light;
+                    border-top-left-radius: 0px;
+                    border-bottom-left-radius: 0px;
 
-                &:active {
-                    background-color: $primary-light;
+                    .text-hover {
+                        transition: $animation-2;
+                        color: $primary-main;
+                    }
                 }
             }
         }
