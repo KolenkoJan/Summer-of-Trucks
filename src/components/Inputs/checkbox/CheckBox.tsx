@@ -10,7 +10,7 @@ interface ICheckboxProps {
 
 export const CheckBox: React.FC<ICheckboxProps> = ({ isChecked, label, onChange }) => {
     return (
-        <label className="container base-text body-m">
+        <label className="checkbox-container base-text body-m">
             {label}
             <input type="checkbox" checked={isChecked} onChange={onChange ? (e) => onChange(e.target.checked) : undefined} />
             <div className="checkmark">

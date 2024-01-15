@@ -1,0 +1,9 @@
+@import "../../theme/Theme.scss";
+
+.card {
+    padding: $spacing-l;
+    background-color: $paper;
+    border-radius: $border-radius;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
