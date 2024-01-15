@@ -1,8 +1,9 @@
 import { observer } from "mobx-react-lite"
 import "./SideMenu.scss"
-import { NavLink, useNavigate } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import { Text } from "../../components/typography/Text"
 import { AuthService } from "../../services"
+import { SideMenuNavLink } from "./SideMenuNavLink"
 
 interface ISideMenuProps {
     isSideMenuVisible?: boolean
@@ -15,34 +16,26 @@ export const SideMenu: React.FC<ISideMenuProps> = observer(({ isSideMenuVisible 
         <div className={`side-menu ${isSideMenuVisibleClass}`}>
             <ul className="list-items">
                 <li>
-                    <NavLink to={"/"}>
-                        <Text variant="body-s" color="text-secondary" className="text-hover">
-                            Dashboard
-                        </Text>
-                    </NavLink>
+                    <SideMenuNavLink to="/" textClassName="text-hover" color="text-secondary" variant="body-s">
+                        Dashboard
+                    </SideMenuNavLink>
                 </li>
                 <li>
-                    <NavLink to={"/components"}>
-                        <Text variant="body-s" color="text-secondary" className="text-hover">
-                            Components
-                        </Text>
-                    </NavLink>
+                    <SideMenuNavLink to="/components" textClassName="text-hover" color="text-secondary" variant="body-s">
+                        Components
+                    </SideMenuNavLink>
                 </li>
                 {AuthService.isAdmin && (
                     <li>
-                        <NavLink to={"/example"}>
-                            <Text variant="body-s" color="text-secondary" className="text-hover">
-                                Example
-                            </Text>
-                        </NavLink>
+                        <SideMenuNavLink to="/example" textClassName="text-hover" color="text-secondary" variant="body-s">
+                            Example
+                        </SideMenuNavLink>
                     </li>
                 )}
                 <li>
-                    <NavLink to={"/profile"}>
-                        <Text variant="body-s" color="text-secondary" className="text-hover">
-                            Profile
-                        </Text>
-                    </NavLink>
+                    <SideMenuNavLink to="/profile" textClassName="text-hover" color="text-secondary" variant="body-s">
+                        Profile
+                    </SideMenuNavLink>
                 </li>
             </ul>
         </div>

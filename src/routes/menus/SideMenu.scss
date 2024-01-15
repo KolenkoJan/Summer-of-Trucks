@@ -27,14 +27,11 @@
                 text-decoration: none;
                 font-weight: 600;
                 transition: $animation-2;
-                border-left: 1px solid $grey-400;
             
 
                 &:hover {
                     background-color: $grey-100;
                     border-radius: $border-radius;
-                    border-top-left-radius: 0px;
-                    border-bottom-left-radius: 0px;
                     cursor: pointer;
 
                     .text-hover {
@@ -46,9 +43,6 @@
                 &:focus {
                     background-color: rgba($primary-light, .1);
                     border-radius: $border-radius;
-                    border-left: 1px solid $primary-light;
-                    border-top-left-radius: 0px;
-                    border-bottom-left-radius: 0px;
 
                     .text-hover {
                         transition: $animation-2;
