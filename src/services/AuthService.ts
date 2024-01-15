@@ -1,11 +1,21 @@
 import { makeAutoObservable } from "mobx"
-import { Navigate, useNavigate } from "react-router-dom"
+import { type NavigateFunction } from "react-router-dom"
 
 class _AuthService {
-    isLoggedIn = false
+    isLoggedIn = true
+    isAdmin = true
 
     constructor() {
         makeAutoObservable(this)
+    }
+
+    logIn = () => {
+        this.isLoggedIn = true
+    }
+
+    logOut = (navigate: NavigateFunction) => {
+        this.isLoggedIn = false
+        navigate("/")
     }
 }
 

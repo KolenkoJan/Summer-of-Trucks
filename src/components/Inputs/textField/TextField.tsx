@@ -1,3 +1,4 @@
+import { observer } from "mobx-react-lite"
 import "../textField/TextField.scss"
 
 type TextFieldType = "text" | "number" | "date" | "file"
@@ -12,7 +13,8 @@ interface ITextFieldProps<T extends TextFieldType = "text"> {
     type?: T
 }
 
-export const TextField = <T extends TextFieldType = "text">({ onChange, placeholder, value, className, type = "text" as T }: ITextFieldProps<T>) => {
+export const TextField = observer(<T extends TextFieldType = "text">({ onChange, placeholder, value, className, type = "text" as T }: ITextFieldProps<T>) => {
+    console.log(placeholder, value)
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
         switch (type) {
@@ -28,9 +30,5 @@ export const TextField = <T extends TextFieldType = "text">({ onChange, placehol
         }
     }
 
-    return <input type={type} placeholder={placeholder} onChange={handleChange} value={value} className={`base-input ${className}`} />
-}
-
-TextField.defaultProps = {
-    type: "text",
-}
+    return <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className}`} />
+})

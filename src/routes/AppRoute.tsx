@@ -1,57 +1,68 @@
-import { createBrowserRouter, Navigate, Outlet, RouterProvider, useLocation, useNavigate } from "react-router-dom"
+import { createBrowserRouter, RouterProvider, useLocation, useNavigate } from "react-router-dom"
+import { ComponentsRoute } from "./ComponentsRoute"
+import { LogInRoute } from "./LogInRoute"
+import { observer } from "mobx-react-lite"
+import { AuthService } from "../services"
+import { HomeRoute } from "./HomeRoute"
+import { useEffect } from "react"
 import { AdminRoute } from "./AdminRoute"
 import { ProfileRoute } from "./ProfileRoute"
-import { SideMenu } from "./menus/SideMenu"
-import { Header } from "../components/header/Header"
-import { useState } from "react"
-import { ProfilePage } from "../pages/ProfilePage"
-import { AuthService } from "../services"
+import { DashboardRoute } from "./DashboardRoute"
 
-export const AppRoute = () => {
-    const [isSideMenuVisible, setIsSideMenuVisible] = useState(false)
-    const url = window.location.href
+/**
+ * Navigates back
+ */
+const NotFoundRoute = observer(() => {
+    const navigate = useNavigate()
+    const location = useLocation()
 
-    const toggleSideMenu = () => {
-        setIsSideMenuVisible(!isSideMenuVisible)
+    useEffect(() => {
+        navigate(location.pathname.slice(0, location.pathname.lastIndexOf("/")))
+    }, [location.pathname])
+
+    return <div>Navigating...</div>
+})
+
+export const AppRoute = observer(() => {
+    let router: ReturnType<typeof createBrowserRouter>
+
+    if (AuthService.isLoggedIn) {
+        router = createBrowserRouter([
+            {
+                path: "",
+                element: <HomeRoute />,
+                errorElement: <NotFoundRoute />,
+                children: [
+                    {
+                        path: "components",
+                        element: <ComponentsRoute />,
+                    },
+                    {
+                        path: "",
+                        element: <DashboardRoute />,
+                    },
+                    {
+                        path: "profile",
+                        element: <ProfileRoute />,
+                    },
+                    AuthService.isAdmin
+                        ? {
+                              path: "example",
+                              element: <AdminRoute />,
+                          }
+                        : undefined,
+                ],
+            },
+        ])
+    } else {
+        router = createBrowserRouter([
+            {
+                path: "",
+                element: <LogInRoute />,
+                errorElement: <NotFoundRoute />,
+            },
+        ])
     }
-
-    if (url === "http://localhost:8085/" && AuthService.isLoggedIn) {
-        window.location.replace("http://localhost:8085/home")
-    }
-
-    if (url !== "http://localhost:8085/" && !AuthService.isLoggedIn) {
-        window.location.replace("http://localhost:8085")
-    }
-
-    const router = createBrowserRouter([
-        {
-            index: true,
-            path: "",
-            element: <ProfilePage />,
-        },
-        {
-            path: "home",
-            element: (
-                <div className="flex-container">
-                    <Header isSideMenuVisible={toggleSideMenu} />
-                    <div className="flex">
-                        <SideMenu isSideMenuVisible={isSideMenuVisible} />
-                        <Outlet />
-                    </div>
-                </div>
-            ),
-            children: [
-                {
-                    path: "",
-                    element: <AdminRoute />,
-                },
-                {
-                    path: "profile",
-                    element: <ProfileRoute />,
-                },
-            ],
-        },
-    ])
 
     return <RouterProvider router={router} />
-}
+})
