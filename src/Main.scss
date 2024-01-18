@@ -131,5 +131,24 @@ body, #root {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    width: 500px;
+    width: 700px;
 }
+
+.flex-gap {
+    display: flex;
+    gap: 16px;
+}
+
+.flex-column-gap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.button-center {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

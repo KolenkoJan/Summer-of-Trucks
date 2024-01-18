@@ -9,11 +9,11 @@ export class AdminRouteStore {
         makeAutoObservable(this)
     }
 
-    setEvent<K extends keyof ITodo, V extends ITodo[K]>(key: K, value: V) {
+    setTodo<K extends keyof ITodo, V extends ITodo[K]>(key: K, value: V) {
         this.event[key] = value
     }
 
-    createEvent() {
+    createTodo() {
         this.dbEvents.push(this.event as ITodo)
         this.event = {}
     }

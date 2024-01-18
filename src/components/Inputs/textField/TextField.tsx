@@ -14,7 +14,6 @@ interface ITextFieldProps<T extends TextFieldType = "text"> {
 }
 
 export const TextField = observer(<T extends TextFieldType = "text">({ onChange, placeholder, value, className, type = "text" as T }: ITextFieldProps<T>) => {
-    console.log(placeholder, value)
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
         switch (type) {
