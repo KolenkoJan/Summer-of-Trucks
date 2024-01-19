@@ -58,3 +58,46 @@ $size-attributes: min-width, width, max-width, min-height, height, max-height;
 .cursor-pointer {
   cursor: pointer;
 }
+
+// Displays
+
+$display-value: flex, block, inline, inline-block, inline-flex, table, inline-table, grid;
+
+@each $value in $display-value {
+  .#{$value} {
+    display: $value;
+  }
+}
+
+// Gaps
+
+$gaps: gap, column-gap, row-gap;
+
+@each $size, $value in $spacing-values {
+  @each $attribute in $gaps {
+    .#{$attribute}-#{$size} {
+      #{$attribute}: $size;
+    }
+  };
+};
+
+// Flex directions
+
+$flex-directions: row, column, row-reverse, column-reverse;
+
+@each $value in $flex-directions {
+  .flex-#{$value} {
+    flex-direction: $value;
+  }
+}
+
+// Justify-content
+
+$justify-content: center, space-between, space-around, space-evenly, start, end; 
+
+@each $value in $justify-content {
+  .justify-#{$value} {
+    justify-content: $value;
+  }
+}
+

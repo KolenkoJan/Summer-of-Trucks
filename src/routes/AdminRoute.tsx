@@ -49,24 +49,18 @@ export const AdminRoute: React.FC = observer(() => {
 
             <Card className="a-card">
                 <Text variant="title-l">Generalne informacije</Text>
-                <Text variant="body-m">Ime dogodka</Text>
-                <TextField placeholder="Ime..." onChange={(value) => eventsStore.setEvent("title", value)} value={eventsStore.event.title} />
-                <Text variant="body-m">Opis dogodka</Text>
-                <TextField placeholder="Opis..." onChange={(value) => eventsStore.setEvent("description", value)} value={eventsStore.event.description} />
-                <Text variant="body-m">Datum začetka</Text>
-                <TextField type="date" onChange={(value) => eventsStore.setEvent("startDate", value)} value={eventsStore.event.startDate} />
+                <TextField placeholder="Ime..." label="Ime dogodka" onChange={(value) => eventsStore.setEvent("title", value)} value={eventsStore.event.title} />
+                <TextField placeholder="Opis..." label="Opis dogodka" onChange={(value) => eventsStore.setEvent("description", value)} value={eventsStore.event.description} />
+                <TextField type="date" label="Datum začetka" onChange={(value) => eventsStore.setEvent("startDate", value)} value={eventsStore.event.startDate} />
                 <Text variant="title-l">Lokacija dogodka</Text>
                 <Text variant="body-s">Ima dogodek fizično lokacijo?</Text>
-                <Text variant="body-m">Fizični naslov dogodka</Text>
-                <TextField placeholder="Naslov..." onChange={(value) => eventsStore.setEvent("address", value)} value={eventsStore.event.address} />
-                <div className="flex-gap">
-                    <div className="flex-column-gap">
-                        <Text variant="body-m">Latitude</Text>
-                        <TextField placeholder="Latitude..." type="number" onChange={(value) => eventsStore.setEvent("latitude", value)} value={eventsStore.event.latitude} />
+                <TextField placeholder="Naslov..." label="Fizični naslov dogodka" onChange={(value) => eventsStore.setEvent("address", value)} value={eventsStore.event.address} />
+                <div className="flex gap-l">
+                    <div className="flex flex-column gap-l">
+                        <TextField placeholder="Latitude..." label="Latitude" type="number" onChange={(value) => eventsStore.setEvent("latitude", value)} value={eventsStore.event.latitude} />
                     </div>
-                    <div className="flex-column-gap">
-                        <Text variant="body-m">Longitude</Text>
-                        <TextField placeholder="Longitude" type="number" onChange={(value) => eventsStore.setEvent("longitude", value)} value={eventsStore.event.longitude} />
+                    <div className="flex flex-column gap-l">
+                        <TextField placeholder="Longitude" label="Longitude" type="number" onChange={(value) => eventsStore.setEvent("longitude", value)} value={eventsStore.event.longitude} />
                     </div>
                 </div>
                 <div className="button-center">
@@ -87,7 +81,7 @@ export const AdminRoute: React.FC = observer(() => {
                         </tr>
                     </thead>
                     <tbody>
-                        {eventsStore.dbEvents.map((dbEvent) => (
+                        {eventsStore.dbEvents.map((dbEvent, index) => (
                             <tr key={dbEvent.title}>
                                 <td>{dbEvent.title}</td>
                                 <td>{dbEvent.description}</td>
@@ -95,6 +89,9 @@ export const AdminRoute: React.FC = observer(() => {
                                 <td>{dbEvent.address}</td>
                                 <td>{dbEvent.latitude}</td>
                                 <td>{dbEvent.longitude}</td>
+                                <td>
+                                    <Button onClick={() => eventsStore.deleteEvent(index)}>-</Button>
+                                </td>
                             </tr>
                         ))}
 

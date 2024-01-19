@@ -1,5 +1,6 @@
 import { observer } from "mobx-react-lite"
 import "../textField/TextField.scss"
+import { Text } from "../../typography/Text"
 
 type TextFieldType = "text" | "number" | "date" | "file"
 
@@ -11,9 +12,10 @@ interface ITextFieldProps<T extends TextFieldType = "text"> {
     value?: TextFieldValueType<T>
     className?: string
     type?: T
+    label?: string
 }
 
-export const TextField = observer(<T extends TextFieldType = "text">({ onChange, placeholder, value, className, type = "text" as T }: ITextFieldProps<T>) => {
+export const TextField = observer(<T extends TextFieldType = "text">({ label, onChange, placeholder, value, className, type = "text" as T }: ITextFieldProps<T>) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
         switch (type) {
@@ -29,5 +31,12 @@ export const TextField = observer(<T extends TextFieldType = "text">({ onChange,
         }
     }
 
-    return <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className}`} />
+    return label ? (
+        <div className="flex flex-column gap-l">
+            <Text>{label}</Text>
+            <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className}`} />
+        </div>
+    ) : (
+        <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className}`} />
+    )
 })

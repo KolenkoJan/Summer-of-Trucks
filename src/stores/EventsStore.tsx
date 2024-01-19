@@ -17,4 +17,8 @@ export class EventsStore {
         this.dbEvents.push(this.event as IEvent)
         this.event = {}
     }
+
+    deleteEvent(index: number) {
+        this.dbEvents.splice(index, 1)
+    }
 }
