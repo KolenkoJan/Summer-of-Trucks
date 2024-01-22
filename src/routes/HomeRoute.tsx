@@ -10,7 +10,7 @@ export const HomeRoute = observer(() => {
     return (
         <div className="flex-container">
             <Header isSideMenuVisible={() => setIsSideMenuVisible(!isSideMenuVisible)} />
-            <div className="flex">
+            <div className="flex-layout">
                 <SideMenu isSideMenuVisible={isSideMenuVisible} />
                 <Outlet />
             </div>

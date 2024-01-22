@@ -14,7 +14,7 @@ export const AdminRoute: React.FC = observer(() => {
 
     return (
         <div className="container padding-xl gap-xl">
-            <Card className="a-card">
+            <Card className="flex flex-column gap-l a-card">
                 <Table>
                     <thead>
                         <tr>
@@ -39,7 +39,7 @@ export const AdminRoute: React.FC = observer(() => {
                 </Table>
             </Card>
 
-            <Card className="a-card">
+            <Card className="flex flex-column gap-l a-card">
                 <TextField className="" placeholder="Title" value={store.event.title} onChange={(value) => store.setTodo("title", value)} />
                 <TextField placeholder="Description" value={store.event.description} onChange={(value) => store.setTodo("description", value)} />
                 <div>
@@ -47,7 +47,7 @@ export const AdminRoute: React.FC = observer(() => {
                 </div>
             </Card>
 
-            <Card className="a-card">
+            <Card className="flex flex-column gap-l a-card">
                 <Text variant="title-l">Generalne informacije</Text>
                 <TextField placeholder="Ime..." label="Ime dogodka" onChange={(value) => eventsStore.setEvent("title", value)} value={eventsStore.event.title} />
                 <TextField placeholder="Opis..." label="Opis dogodka" onChange={(value) => eventsStore.setEvent("description", value)} value={eventsStore.event.description} />
@@ -63,12 +63,12 @@ export const AdminRoute: React.FC = observer(() => {
                         <TextField placeholder="Longitude" label="Longitude" type="number" onChange={(value) => eventsStore.setEvent("longitude", value)} value={eventsStore.event.longitude} />
                     </div>
                 </div>
-                <div className="button-center">
+                <div className="flex flex-column margin-top-xl justify-center items-center">
                     <Button onClick={() => eventsStore.createEvent()}>Objavi dogodek</Button>
                 </div>
             </Card>
 
-            <Card className="a-card">
+            <Card className="flex flex-column gap-l a-card">
                 <Table>
                     <thead>
                         <tr>

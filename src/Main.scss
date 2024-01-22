@@ -55,7 +55,7 @@ body, #root {
     overflow: auto;
 }
 
-.flex {
+.flex-layout {
     display: flex;
     flex: 1;
     overflow: auto;
@@ -128,15 +128,6 @@ body, #root {
 }
 
 .a-card {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 700px;
+    width: 800px;
 }
 
-.button-center {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}

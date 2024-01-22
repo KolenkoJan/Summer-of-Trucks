@@ -101,3 +101,13 @@ $justify-content: center, space-between, space-around, space-evenly, start, end;
   }
 }
 
+// Align-content
+
+$align-content: center, flex-start, flex-end, baseline, stretch;
+
+@each $attribute in $align-content {
+  .items-#{$attribute} {
+    align-items: $attribute;
+  }
+}
+
