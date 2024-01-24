@@ -13,9 +13,10 @@ interface ITextFieldProps<T extends TextFieldType = "text"> {
     className?: string
     type?: T
     label?: string
+    error?: string
 }
 
-export const TextField = observer(<T extends TextFieldType = "text">({ label, onChange, placeholder, value, className, type = "text" as T }: ITextFieldProps<T>) => {
+export const TextField = observer(<T extends TextFieldType = "text">({ label, onChange, placeholder, value, className, error, type = "text" as T }: ITextFieldProps<T>) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
         switch (type) {
@@ -34,9 +35,17 @@ export const TextField = observer(<T extends TextFieldType = "text">({ label, on
     return label ? (
         <div className="flex flex-column gap-l">
             <Text>{label}</Text>
-            <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className}`} />
+            <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className} ${error ? "error" : ""}`} />
+            {error && (
+                <Text className="message" variant="body-s">
+                    {error}
+                </Text>
+            )}
         </div>
     ) : (
-        <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className}`} />
+        <>
+            <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className}`} />
+            {error && <div className="error-message">{error}</div>}
+        </>
     )
 })

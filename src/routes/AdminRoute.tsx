@@ -43,15 +43,33 @@ export const AdminRoute: React.FC = observer(() => {
                 <TextField className="" placeholder="Title" value={store.event.title} onChange={(value) => store.setTodo("title", value)} />
                 <TextField placeholder="Description" value={store.event.description} onChange={(value) => store.setTodo("description", value)} />
                 <div>
-                    <Button onClick={() => store.createTodo()}>Save</Button>
+                    <Button>Save</Button>
                 </div>
             </Card>
 
             <Card className="flex flex-column gap-l a-card">
                 <Text variant="title-l">Generalne informacije</Text>
-                <TextField placeholder="Ime..." label="Ime dogodka" onChange={(value) => eventsStore.setEvent("title", value)} value={eventsStore.event.title} />
-                <TextField placeholder="Opis..." label="Opis dogodka" onChange={(value) => eventsStore.setEvent("description", value)} value={eventsStore.event.description} />
-                <TextField type="date" label="Datum začetka" onChange={(value) => eventsStore.setEvent("startDate", value)} value={eventsStore.event.startDate} />
+                <TextField
+                    error={eventsStore.validationErrors.find((error) => error.includes("title")) || null}
+                    placeholder="Ime..."
+                    label="Ime dogodka"
+                    onChange={(value) => eventsStore.setEvent("title", value)}
+                    value={eventsStore.event.title}
+                />
+                <TextField
+                    error={eventsStore.validationErrors.find((error) => error.includes("description")) || null}
+                    placeholder="Opis..."
+                    label="Opis dogodka"
+                    onChange={(value) => eventsStore.setEvent("description", value)}
+                    value={eventsStore.event.description}
+                />
+                <TextField
+                    error={eventsStore.validationErrors.find((error) => error.includes("startDate")) || null}
+                    type="date"
+                    label="Datum začetka"
+                    onChange={(value) => eventsStore.setEvent("startDate", value)}
+                    value={eventsStore.event.startDate}
+                />
                 <Text variant="title-l">Lokacija dogodka</Text>
                 <Text variant="body-s">Ima dogodek fizično lokacijo?</Text>
                 <TextField placeholder="Naslov..." label="Fizični naslov dogodka" onChange={(value) => eventsStore.setEvent("address", value)} value={eventsStore.event.address} />
@@ -64,7 +82,7 @@ export const AdminRoute: React.FC = observer(() => {
                     </div>
                 </div>
                 <div className="flex flex-column margin-top-xl justify-center items-center">
-                    <Button onClick={() => eventsStore.createEvent()}>Objavi dogodek</Button>
+                    <Button onClick={eventsStore.createEvent}>Objavi dogodek</Button>
                 </div>
             </Card>
 

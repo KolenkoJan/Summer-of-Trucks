@@ -22,4 +22,11 @@
     &:focus {
         border: 1px solid $primary-main;
     }
+
+    &.error {
+        border: 1px solid rgba(red, 1);
+
+       
+    }
 }
+
