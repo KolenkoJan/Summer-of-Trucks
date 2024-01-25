@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite"
 import "../textField/TextField.scss"
 import { Text } from "../../typography/Text"
+import { ValidationErrorItem } from "joi"
 
 type TextFieldType = "text" | "number" | "date" | "file"
 
@@ -13,7 +14,7 @@ interface ITextFieldProps<T extends TextFieldType = "text"> {
     className?: string
     type?: T
     label?: string
-    error?: string
+    error?: ValidationErrorItem | undefined
 }
 
 export const TextField = observer(<T extends TextFieldType = "text">({ label, onChange, placeholder, value, className, error, type = "text" as T }: ITextFieldProps<T>) => {
@@ -34,18 +35,18 @@ export const TextField = observer(<T extends TextFieldType = "text">({ label, on
 
     return label ? (
         <div className="flex flex-column gap-l">
-            <Text>{label}</Text>
+            <Text color={error ? `error-main` : `text-primary`}>{label}</Text>
             <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className} ${error ? "error" : ""}`} />
             {error && (
-                <Text className="message" variant="body-s">
-                    {error}
+                <Text color="error-main" className="message" variant="body-s">
+                    {error.message}
                 </Text>
             )}
         </div>
     ) : (
         <>
             <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className}`} />
-            {error && <div className="error-message">{error}</div>}
+            {error && <div className="error-message">{error.message}</div>}
         </>
     )
 })

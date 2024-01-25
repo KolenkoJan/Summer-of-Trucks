@@ -50,21 +50,21 @@ export const AdminRoute: React.FC = observer(() => {
             <Card className="flex flex-column gap-l a-card">
                 <Text variant="title-l">Generalne informacije</Text>
                 <TextField
-                    error={eventsStore.validationErrors.find((error) => error.includes("title")) || null}
+                    error={eventsStore.getErrorForKey("title")}
                     placeholder="Ime..."
                     label="Ime dogodka"
                     onChange={(value) => eventsStore.setEvent("title", value)}
                     value={eventsStore.event.title}
                 />
                 <TextField
-                    error={eventsStore.validationErrors.find((error) => error.includes("description")) || null}
+                    error={eventsStore.getErrorForKey("description")}
                     placeholder="Opis..."
                     label="Opis dogodka"
                     onChange={(value) => eventsStore.setEvent("description", value)}
                     value={eventsStore.event.description}
                 />
                 <TextField
-                    error={eventsStore.validationErrors.find((error) => error.includes("startDate")) || null}
+                    error={eventsStore.getErrorForKey("startDate")}
                     type="date"
                     label="Datum začetka"
                     onChange={(value) => eventsStore.setEvent("startDate", value)}
@@ -72,7 +72,13 @@ export const AdminRoute: React.FC = observer(() => {
                 />
                 <Text variant="title-l">Lokacija dogodka</Text>
                 <Text variant="body-s">Ima dogodek fizično lokacijo?</Text>
-                <TextField placeholder="Naslov..." label="Fizični naslov dogodka" onChange={(value) => eventsStore.setEvent("address", value)} value={eventsStore.event.address} />
+                <TextField
+                    error={eventsStore.getErrorForKey("address")}
+                    placeholder="Naslov..."
+                    label="Fizični naslov dogodka"
+                    onChange={(value) => eventsStore.setEvent("address", value)}
+                    value={eventsStore.event.address}
+                />
                 <div className="flex gap-l">
                     <div className="flex flex-column gap-l">
                         <TextField placeholder="Latitude..." label="Latitude" type="number" onChange={(value) => eventsStore.setEvent("latitude", value)} value={eventsStore.event.latitude} />
