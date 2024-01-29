@@ -1,3 +1,5 @@
+@import "../../theme/Theme.scss";
+
 .button-icon {
     display: flex;
     justify-content: center;
@@ -10,7 +12,7 @@
     color: rgb(0, 127, 255);
     border-radius: 12px;
     box-shadow: rgb(243, 246, 249) 0px 1px 2px inset, rgba(229, 234, 242, 0.6) 0px 1px 0.5px;
-
+    transition: $animation-1;
 
 
 

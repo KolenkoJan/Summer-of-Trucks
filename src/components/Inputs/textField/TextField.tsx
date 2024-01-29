@@ -14,10 +14,11 @@ interface ITextFieldProps<T extends TextFieldType = "text"> {
     className?: string
     type?: T
     label?: string
-    error?: ValidationErrorItem | undefined
+    error?: ValidationErrorItem
+    requiredMessage?: string
 }
 
-export const TextField = observer(<T extends TextFieldType = "text">({ label, onChange, placeholder, value, className, error, type = "text" as T }: ITextFieldProps<T>) => {
+export const TextField = observer(<T extends TextFieldType = "text">({ label, onChange, placeholder, requiredMessage, value, className, error, type = "text" as T }: ITextFieldProps<T>) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
         switch (type) {
@@ -33,9 +34,16 @@ export const TextField = observer(<T extends TextFieldType = "text">({ label, on
         }
     }
 
-    return label ? (
+    return (
         <div className="flex flex-column gap-l">
-            <Text color={error ? `error-main` : `text-primary`}>{label}</Text>
+            <div className="flex items-center gap-m">
+                {label && <Text color={error ? "error-main" : "text-primary"}>{label}</Text>}
+                {requiredMessage && (
+                    <Text color="text-disabled" variant="body-s">
+                        {requiredMessage}
+                    </Text>
+                )}
+            </div>
             <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className} ${error ? "error" : ""}`} />
             {error && (
                 <Text color="error-main" className="message" variant="body-s">
@@ -43,10 +51,5 @@ export const TextField = observer(<T extends TextFieldType = "text">({ label, on
                 </Text>
             )}
         </div>
-    ) : (
-        <>
-            <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className}`} />
-            {error && <div className="error-message">{error.message}</div>}
-        </>
     )
 })

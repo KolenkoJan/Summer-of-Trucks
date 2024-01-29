@@ -1,6 +1,6 @@
 @import "../../theme/Theme.scss";
 
-button {
+.button {
     display: flex;
     align-items: center;
     padding: 6px 16px;
@@ -12,7 +12,15 @@ button {
     cursor: pointer;
     font-weight: 500;
 
-    &:hover {
+    &:disabled {
+        color: $text-disabled;
+        cursor: auto;
+        box-shadow: none;
+        background-color: rgba(0, 0, 0, 0.12);
+        border: none;
+    }
+
+    &:hover:enabled {
         background-color: $primary-dark;
         border-color: $primary-dark;
     }
@@ -46,12 +54,12 @@ button {
         box-sizing: border-box;
         border-radius: 12px;
         box-shadow: rgb(243, 246, 249) 0px 1px 2px inset, rgba(229, 234, 242, 0.6) 0px 1px 0.5px;
-    
-        &:hover {
+
+        &:hover:enabled {
             border-color: rgb(199, 208, 221);
             background: rgb(243, 246, 249);
         }
-    
+
         svg {
             height: 16px;
             width: 16px;

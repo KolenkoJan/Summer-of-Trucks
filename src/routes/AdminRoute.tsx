@@ -50,6 +50,7 @@ export const AdminRoute: React.FC = observer(() => {
             <Card className="flex flex-column gap-l a-card">
                 <Text variant="title-l">Generalne informacije</Text>
                 <TextField
+                    requiredMessage={eventsStore.getRequiredMessage("title")}
                     error={eventsStore.getErrorForKey("title")}
                     placeholder="Ime..."
                     label="Ime dogodka"
@@ -57,6 +58,7 @@ export const AdminRoute: React.FC = observer(() => {
                     value={eventsStore.event.title}
                 />
                 <TextField
+                    requiredMessage={eventsStore.getRequiredMessage("description")}
                     error={eventsStore.getErrorForKey("description")}
                     placeholder="Opis..."
                     label="Opis dogodka"
@@ -64,6 +66,7 @@ export const AdminRoute: React.FC = observer(() => {
                     value={eventsStore.event.description}
                 />
                 <TextField
+                    requiredMessage={eventsStore.getRequiredMessage("startDate")}
                     error={eventsStore.getErrorForKey("startDate")}
                     type="date"
                     label="Datum začetka"
@@ -73,7 +76,7 @@ export const AdminRoute: React.FC = observer(() => {
                 <Text variant="title-l">Lokacija dogodka</Text>
                 <Text variant="body-s">Ima dogodek fizično lokacijo?</Text>
                 <TextField
-                    error={eventsStore.getErrorForKey("address")}
+                    requiredMessage={eventsStore.getRequiredMessage("address")}
                     placeholder="Naslov..."
                     label="Fizični naslov dogodka"
                     onChange={(value) => eventsStore.setEvent("address", value)}
@@ -88,7 +91,9 @@ export const AdminRoute: React.FC = observer(() => {
                     </div>
                 </div>
                 <div className="flex flex-column margin-top-xl justify-center items-center">
-                    <Button onClick={eventsStore.createEvent}>Objavi dogodek</Button>
+                    <Button disabled={!eventsStore.areAllFieldsValid()} onClick={eventsStore.createEvent}>
+                        Objavi dogodek
+                    </Button>
                 </div>
             </Card>
 
