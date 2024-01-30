@@ -8,7 +8,10 @@
     line-height: 23px;
     border-radius: $border-radius;
     border: 1px solid rgba($grey-900, 0.3);
-    outline: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    
 
     &::placeholder {
         color: $text-secondary;
@@ -19,16 +22,18 @@
     }
 
     &:focus {
-        border: 1px solid $primary-main;
+        box-shadow: inset 0 0 0 1px rgba($primary-main, 1);
         
     }
 
     &.error {
         border: 1px solid rgba($error-main, 1);
+        border-radius: $border-radius;
 
         &:focus {
-            border: 1px solid rgba($error-main, 1);
+            border-radius: $border-radius;
+            box-shadow: inset 0 0 0 1px rgba($error-main, 1);
+            outline: none;
         }
     }
 }
-
