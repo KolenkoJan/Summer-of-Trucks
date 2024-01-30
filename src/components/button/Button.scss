@@ -13,7 +13,6 @@
     font-weight: 500;
 
     &:disabled {
-        color: $text-disabled;
         cursor: auto;
         box-shadow: none;
         background-color: rgba(0, 0, 0, 0.12);

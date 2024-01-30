@@ -2,6 +2,7 @@ import { observer } from "mobx-react-lite"
 import "../textField/TextField.scss"
 import { Text } from "../../typography/Text"
 import { ValidationErrorItem } from "joi"
+import { useState } from "react"
 
 type TextFieldType = "text" | "number" | "date" | "file"
 
@@ -15,10 +16,10 @@ interface ITextFieldProps<T extends TextFieldType = "text"> {
     type?: T
     label?: string
     error?: ValidationErrorItem
-    requiredMessage?: string
 }
 
-export const TextField = observer(<T extends TextFieldType = "text">({ label, onChange, placeholder, requiredMessage, value, className, error, type = "text" as T }: ITextFieldProps<T>) => {
+export const TextField = observer(<T extends TextFieldType = "text">({ label, onChange, placeholder, value, className, error, type = "text" as T }: ITextFieldProps<T>) => {
+    const [showError, setShowError] = useState<boolean>(false)
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
         switch (type) {
@@ -32,24 +33,30 @@ export const TextField = observer(<T extends TextFieldType = "text">({ label, on
             default:
                 console.log("Type Error")
         }
+
+        if (value === null || value === "") {
+            setShowError(true)
+        } else {
+            setShowError(false)
+        }
     }
 
     return (
         <div className="flex flex-column gap-l">
             <div className="flex items-center gap-m">
-                {label && <Text color={error ? "error-main" : "text-primary"}>{label}</Text>}
-                {requiredMessage && (
+                {label && <Text color={showError && error ? "error-main" : "text-primary"}>{label}</Text>}
+                {error ? (
                     <Text color="text-disabled" variant="body-s">
-                        {requiredMessage}
+                        obvezno*
                     </Text>
-                )}
+                ) : undefined}
             </div>
-            <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className} ${error ? "error" : ""}`} />
-            {error && (
+            <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className} ${showError && error ? "error" : ""}`} />
+            {error && showError ? (
                 <Text color="error-main" className="message" variant="body-s">
                     {error.message}
                 </Text>
-            )}
+            ) : undefined}
         </div>
     )
 })

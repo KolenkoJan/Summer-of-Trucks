@@ -19,14 +19,15 @@
     }
 
     &:focus {
-        border: 2px solid $primary-main;
+        border: 1px solid $primary-main;
+        
     }
 
     &.error {
         border: 1px solid rgba($error-main, 1);
 
         &:focus {
-            border: 2px solid rgba($error-main, 1);
+            border: 1px solid rgba($error-main, 1);
         }
     }
 }
