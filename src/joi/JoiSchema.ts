@@ -24,7 +24,7 @@ export function JoiSchema<TSchema extends object>(schema: ObjectSchema<TSchema>)
             this.result = this.schema.validate(value, { abortEarly: false })
         },
 
-        validateKey(_key: unknown) {
+        validateKey(key: string) {
             // Add code that validates key, here you can also note that a key has been validated - that change should reflect getRule isValidated return value based on key
         },
 
@@ -37,7 +37,7 @@ export function JoiSchema<TSchema extends object>(schema: ObjectSchema<TSchema>)
 
             return {
                 isRequired,
-                isValidated: false, //
+                isValidated: false, // should return if key has been validated
                 errors,
             }
         },
