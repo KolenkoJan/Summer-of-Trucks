@@ -50,7 +50,7 @@ export const AppRoute = observer(() => {
                               path: "example",
                               element: <AdminRoute />,
                           }
-                        : undefined,
+                        : {},
                 ],
             },
         ])

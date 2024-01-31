@@ -50,21 +50,21 @@ export const AdminRoute: React.FC = observer(() => {
             <Card className="flex flex-column gap-l a-card">
                 <Text variant="title-l">Generalne informacije</Text>
                 <TextField
-                    error={eventsStore.getErrorForKey("title")}
+                    schemaRule={eventsStore.eventSchema.getRule("title")}
                     placeholder="Ime..."
                     label="Ime dogodka"
                     onChange={(value) => eventsStore.setEvent("title", value)}
                     value={eventsStore.event.title}
                 />
                 <TextField
-                    error={eventsStore.getErrorForKey("description")}
+                    schemaRule={eventsStore.eventSchema.getRule("description")}
                     placeholder="Opis..."
                     label="Opis dogodka"
                     onChange={(value) => eventsStore.setEvent("description", value)}
                     value={eventsStore.event.description}
                 />
                 <TextField
-                    error={eventsStore.getErrorForKey("startDate")}
+                    schemaRule={eventsStore.eventSchema.getRule("startDate")}
                     type="date"
                     label="Datum začetka"
                     onChange={(value) => eventsStore.setEvent("startDate", value)}
