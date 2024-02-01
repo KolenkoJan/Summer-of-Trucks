@@ -12,4 +12,5 @@ module.exports = createWebpackAliases({
     "@src": "src",
     "@icons": "src/icons",
     "@components": "src/components",
+    "@joi-utils": "src/joi",
 })

@@ -4,6 +4,6 @@ import "./Main.scss"
 import "./theme/ThemeDefault.scss"
 import "./theme/Theme.scss"
 
-const root = createRoot(document.getElementById("root"))
+const root = createRoot(document.getElementById("root")!)
 
 root.render(<AppRoute />)

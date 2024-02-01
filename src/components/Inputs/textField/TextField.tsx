@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite"
 import "../textField/TextField.scss"
 import { Text } from "../../typography/Text"
+import { IJoiSchemaRule } from "../../../joi"
 
 type TextFieldType = "text" | "number" | "date" | "file"
 
@@ -13,30 +14,43 @@ interface ITextFieldProps<T extends TextFieldType = "text"> {
     className?: string
     type?: T
     label?: string
+    schemaRule?: IJoiSchemaRule
 }
 
-export const TextField = observer(<T extends TextFieldType = "text">({ label, onChange, placeholder, value, className, type = "text" as T }: ITextFieldProps<T>) => {
+export const TextField = observer(<T extends TextFieldType = "text">({ label, onChange, placeholder, value, className, schemaRule, type = "text" as T }: ITextFieldProps<T>) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
         switch (type) {
             case "text":
             case "date":
-                onChange(value as TextFieldValueType<T>)
+                onChange?.(value as TextFieldValueType<T>)
                 break
             case "number":
-                onChange(Number(value) as TextFieldValueType<T>)
+                onChange?.(Number(value) as TextFieldValueType<T>)
                 break
             default:
                 console.log("Type Error")
         }
     }
 
-    return label ? (
+    const showError = schemaRule?.isValidated && schemaRule.errors
+
+    return (
         <div className="flex flex-column gap-l">
-            <Text>{label}</Text>
-            <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className}`} />
+            <div className="flex items-center gap-m">
+                {label && <Text color={showError ? "error-main" : "text-primary"}>{label}</Text>}
+                {schemaRule?.isRequired && (
+                    <Text color="text-disabled" variant="body-s">
+                        obvezno*
+                    </Text>
+                )}
+            </div>
+            <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className} ${showError ? "error" : ""}`} />
+            {showError && (
+                <Text color="error-main" className="message" variant="body-s">
+                    {schemaRule?.errors?.[0].message}
+                </Text>
+            )}
         </div>
-    ) : (
-        <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className}`} />
     )
 })
