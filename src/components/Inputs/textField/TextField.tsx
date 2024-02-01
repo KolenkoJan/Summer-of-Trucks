@@ -1,8 +1,7 @@
 import { observer } from "mobx-react-lite"
 import "../textField/TextField.scss"
 import { Text } from "../../typography/Text"
-import { ValidationErrorItem } from "joi"
-import { useState } from "react"
+import { IJoiSchemaRule } from "../../../joi"
 
 type TextFieldType = "text" | "number" | "date" | "file"
 
@@ -15,48 +14,43 @@ interface ITextFieldProps<T extends TextFieldType = "text"> {
     className?: string
     type?: T
     label?: string
-    error?: ValidationErrorItem
+    schemaRule?: IJoiSchemaRule
 }
 
-export const TextField = observer(<T extends TextFieldType = "text">({ label, onChange, placeholder, value, className, error, type = "text" as T }: ITextFieldProps<T>) => {
-    const [showError, setShowError] = useState<boolean>(false)
+export const TextField = observer(<T extends TextFieldType = "text">({ label, onChange, placeholder, value, className, schemaRule, type = "text" as T }: ITextFieldProps<T>) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
         switch (type) {
             case "text":
             case "date":
-                onChange(value as TextFieldValueType<T>)
+                onChange?.(value as TextFieldValueType<T>)
                 break
             case "number":
-                onChange(Number(value) as TextFieldValueType<T>)
+                onChange?.(Number(value) as TextFieldValueType<T>)
                 break
             default:
                 console.log("Type Error")
         }
-
-        if (value === null || value === "") {
-            setShowError(true)
-        } else {
-            setShowError(false)
-        }
     }
+
+    const showError = schemaRule?.isValidated && schemaRule.errors
 
     return (
         <div className="flex flex-column gap-l">
             <div className="flex items-center gap-m">
-                {label && <Text color={showError && error ? "error-main" : "text-primary"}>{label}</Text>}
-                {error ? (
+                {label && <Text color={showError ? "error-main" : "text-primary"}>{label}</Text>}
+                {schemaRule?.isRequired && (
                     <Text color="text-disabled" variant="body-s">
                         obvezno*
                     </Text>
-                ) : undefined}
+                )}
             </div>
-            <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className} ${showError && error ? "error" : ""}`} />
-            {error && showError ? (
+            <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className} ${showError ? "error" : ""}`} />
+            {showError && (
                 <Text color="error-main" className="message" variant="body-s">
-                    {error.message}
+                    {schemaRule?.errors?.[0].message}
                 </Text>
-            ) : undefined}
+            )}
         </div>
     )
 })

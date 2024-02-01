@@ -25,7 +25,8 @@
           ["@src", "./src"],
           ["@assets", "./assets"],
           ["@icons", "./src/icons"],
-          ["@components", "./src/components"]
+          ["@components", "./src/components"],
+          ["@joi-utils", "./src/joi"]
         ],
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
