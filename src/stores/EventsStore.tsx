@@ -4,7 +4,8 @@ import { makeAutoObservable } from "mobx"
 import { IEvent } from "../firebase/interfaces"
 import { ValidationResult } from "joi"
 import { JoiSchema } from "../joi/JoiSchema"
-import { getEventSchema } from "../firebase/schemas/event"
+import { getEventSchema } from "../firebase/schemas/Event"
+import { FirebaseApi } from "../firebase/api"
 
 export class EventsStore {
     dbEvents: IEvent[] = []
@@ -26,16 +27,22 @@ export class EventsStore {
         this.eventSchema.validate(this.event)
     }
 
-    createEvent() {
+    async createEvent() {
         this.eventSchema.validate(this.event)
 
         if (!this.eventSchema.isValid) {
+            alert("Validation failed!")
             return
         }
 
-        this.dbEvents.push(this.event as IEvent)
-        this.event = {}
-        this.eventSchema.clear()
+        try {
+            const event = await FirebaseApi.Events.create(this.event as IEvent)
+            this.dbEvents.push(event)
+            this.event = {}
+            this.eventSchema.clear()
+        } catch (error) {
+            alert(error.message)
+        }
     }
 
     deleteEvent(index: number) {
