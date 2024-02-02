@@ -1,1 +1,1 @@
-export * from "../interfaces/Event"
+export * from "./Event"

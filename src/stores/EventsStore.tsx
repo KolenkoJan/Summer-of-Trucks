@@ -4,7 +4,7 @@ import { makeAutoObservable } from "mobx"
 import { IEvent } from "../firebase/interfaces"
 import { ValidationResult } from "joi"
 import { JoiSchema } from "../joi/JoiSchema"
-import { getEventSchema } from "../firebase/schemas/event"
+import { getEventSchema } from "../firebase/schemas/Event"
 import { FirebaseApi } from "../firebase/api"
 
 export class EventsStore {
@@ -20,8 +20,7 @@ export class EventsStore {
 
     setEvent<K extends keyof IEvent, V extends IEvent[K]>(key: K, value: V) {
         this.event[key] = value
-        this.eventSchema.validate(this.event)
-        this.eventSchema.validateKey
+        this.eventSchema.validateKey(key, this.event)
     }
 
     async createEvent() {
