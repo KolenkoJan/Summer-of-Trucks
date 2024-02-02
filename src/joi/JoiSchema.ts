@@ -14,6 +14,7 @@ export function JoiSchema<TSchema extends object>(schema: ObjectSchema<TSchema>)
     const result = {
         result: undefined as Joi.ValidationResult<TSchema> | undefined,
         schema,
+        isValidateCalled: false,
 
         get isValid() {
             return !this.result?.error
@@ -22,10 +23,12 @@ export function JoiSchema<TSchema extends object>(schema: ObjectSchema<TSchema>)
         // If validate is called, this should also reflect getRule isValidated result. In fact, if this is called, all keys have been validated
         validate(value: unknown) {
             this.result = this.schema.validate(value, { abortEarly: false })
+            this.isValidateCalled = true
         },
 
-        validateKey(key: string) {
+        validateKey(key: string, value: unknown) {
             // Add code that validates key, here you can also note that a key has been validated - that change should reflect getRule isValidated return value based on key
+            this.result = this.schema.validate(value, { abortEarly: false })
         },
 
         getRule(key: string): IJoiSchemaRule | undefined {
@@ -37,7 +40,7 @@ export function JoiSchema<TSchema extends object>(schema: ObjectSchema<TSchema>)
 
             return {
                 isRequired,
-                isValidated: false, // should return if key has been validated
+                isValidated: this.isValidateCalled ? true : false, // should return if key has been validated
                 errors,
             }
         },

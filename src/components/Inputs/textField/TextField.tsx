@@ -2,6 +2,7 @@ import { observer } from "mobx-react-lite"
 import "../textField/TextField.scss"
 import { Text } from "../../typography/Text"
 import { IJoiSchemaRule } from "../../../joi"
+import React from "react"
 
 type TextFieldType = "text" | "number" | "date" | "file"
 
@@ -33,7 +34,7 @@ export const TextField = observer(<T extends TextFieldType = "text">({ label, on
         }
     }
 
-    const showError = schemaRule?.isValidated && schemaRule.errors
+    const showError = schemaRule?.isValidated && schemaRule?.errors && schemaRule.errors.length > 0
 
     return (
         <div className="flex flex-column gap-l">

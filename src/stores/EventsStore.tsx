@@ -13,7 +13,7 @@ export class EventsStore {
     eventSchema = JoiSchema(getEventSchema())
 
     get areAllFieldsValid(): boolean {
-        return !this.validationResult?.error
+        return this.eventSchema.isValid
     }
 
     constructor() {
@@ -24,6 +24,7 @@ export class EventsStore {
     setEvent<K extends keyof IEvent, V extends IEvent[K]>(key: K, value: V) {
         this.event[key] = value
         this.eventSchema.validate(this.event)
+        this.eventSchema.validateKey
     }
 
     createEvent() {
