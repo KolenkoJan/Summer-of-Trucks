@@ -11,10 +11,13 @@ export interface IJoiSchemaRule {
 }
 
 export function JoiSchema<TSchema extends object>(schema: ObjectSchema<TSchema>) {
+    const validatedKeys: Set<string> = new Set()
+
     const result = {
         result: undefined as Joi.ValidationResult<TSchema> | undefined,
         schema,
         isValidateCalled: false,
+        validatedKeys,
 
         get isValid() {
             return !this.result?.error
@@ -28,7 +31,9 @@ export function JoiSchema<TSchema extends object>(schema: ObjectSchema<TSchema>)
 
         validateKey(key: string, value: unknown) {
             // Add code that validates key, here you can also note that a key has been validated - that change should reflect getRule isValidated return value based on key
-            this.result = this.schema.validate(value, { abortEarly: false })
+            this.result = this.schema.validate({ [key]: value }, { abortEarly: false })
+            // Update the set to indicate that this key has been validateds
+            this.validatedKeys.add(key)
         },
 
         getRule(key: string): IJoiSchemaRule | undefined {
@@ -40,13 +45,16 @@ export function JoiSchema<TSchema extends object>(schema: ObjectSchema<TSchema>)
 
             return {
                 isRequired,
-                isValidated: this.isValidateCalled ? true : false, // should return if key has been validated
+                // should return if key has been validateds. Should return if key has been validated
+                // Return true if validate() has been called or the key has been validated
+                isValidated: this.validatedKeys.has(key) ? true : this.isValidateCalled,
                 errors,
             }
         },
 
         clear() {
             // Must clear properties so they look like the same as from the start
+            this.validatedKeys.clear()
         },
     }
 
