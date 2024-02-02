@@ -11,13 +11,11 @@ export interface IJoiSchemaRule {
 }
 
 export function JoiSchema<TSchema extends object>(schema: ObjectSchema<TSchema>) {
-    const validatedKeys: Set<string> = new Set()
-
     const result = {
         result: schema.validate(undefined, { abortEarly: false }) as Joi.ValidationResult,
         schema,
         isValidateCalled: false,
-        validatedKeys,
+        validatedKeys: new Set(),
 
         get isValid() {
             return !this.result?.error
