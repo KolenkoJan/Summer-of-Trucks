@@ -25,7 +25,6 @@ export class EventsStore {
 
     async createEvent() {
         this.eventSchema.validate(this.event)
-        console.log(this.eventSchema.validate(this.event))
 
         if (!this.eventSchema.isValid) {
             alert("Validation failed!")
