@@ -12,6 +12,10 @@ export class EventsStore {
     event: Partial<IEvent> = {}
     validationResult: ValidationResult | undefined = undefined
     eventSchema = JoiSchema(getEventSchema())
+    isIdDisabled: boolean[] = []
+    isButtonDisabled = false
+    isLoading = false
+    error: Partial<Error> = {}
 
     constructor() {
         makeAutoObservable(this)
@@ -25,6 +29,7 @@ export class EventsStore {
 
     async createEvent() {
         this.eventSchema.validate(this.event)
+        this.isButtonDisabled = true
 
         if (!this.eventSchema.isValid) {
             alert("Validation failed!")
@@ -37,11 +42,33 @@ export class EventsStore {
             this.event = {}
             this.eventSchema.clear()
         } catch (error) {
-            alert(error.message)
+            alert(error)
+        } finally {
+            this.isButtonDisabled = false
         }
     }
 
-    deleteEvent(index: number) {
-        this.dbEvents.splice(index, 1)
+    async deleteEvent(eventID: number) {
+        this.isIdDisabled[eventID] = true
+        try {
+            await FirebaseApi.Events.delete(this.dbEvents[eventID].id)
+            this.dbEvents.splice(eventID, 1)
+        } catch (error) {
+            this.error = error
+        } finally {
+            this.isIdDisabled[eventID] = false
+        }
+    }
+
+    async getEvents() {
+        this.isLoading = true
+        try {
+            const events = await FirebaseApi.Events.getMany()
+            this.dbEvents = events
+        } catch (error) {
+            this.error = error
+        } finally {
+            this.isLoading = false
+        }
     }
 }
