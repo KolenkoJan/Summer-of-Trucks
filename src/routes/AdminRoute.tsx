@@ -11,14 +11,15 @@ import { CircularLoader } from "../components/loaders/CircularLoader"
 export const AdminRoute: React.FC = observer(() => {
     const [eventsStore] = useState(() => new EventsStore())
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                await eventsStore.getEvents()
-            } catch (error) {
-                alert(`Error fetching events: ${error.message}`)
-            }
+    const fetchData = async () => {
+        try {
+            await eventsStore.getEvents()
+        } catch (error) {
+            alert(`Error fetching events: ${error.message}`)
         }
+    }
+
+    useEffect(() => {
         fetchData()
     }, [eventsStore.getEvents])
 
@@ -59,7 +60,7 @@ export const AdminRoute: React.FC = observer(() => {
                     </div>
                 </div>
                 <div className="flex flex-column margin-top-xl justify-center items-center">
-                    <Button disabled={eventsStore.isButtonDisabled || !eventsStore.eventSchema.isValid} onClick={eventsStore.createEvent}>
+                    <Button disabled={eventsStore.isVisible || !eventsStore.eventSchema.isValid} onClick={eventsStore.createEvent}>
                         Objavi dogodek
                     </Button>
                 </div>
@@ -77,19 +78,22 @@ export const AdminRoute: React.FC = observer(() => {
                         </tr>
                     </thead>
                     <tbody>
-                        {eventsStore.error && eventsStore.error.message ? (
-                            <tr>
-                                <td colSpan={6}>
-                                    <Text color="error-main" variant="body-s" className="flex justify-center">
-                                        {`Error fetching events: ${eventsStore.error?.message}`}
-                                    </Text>
-                                </td>
-                            </tr>
-                        ) : eventsStore.isLoading ? (
+                        {eventsStore.isSaving ? (
                             <tr>
                                 <td colSpan={6}>
                                     <div className="flex justify-center">
                                         <CircularLoader />
+                                    </div>
+                                </td>
+                            </tr>
+                        ) : eventsStore.error && eventsStore.error.message ? (
+                            <tr>
+                                <td colSpan={6}>
+                                    <div className="flex justify-center items-center gap-l">
+                                        <Text color="error-main" variant="body-s" className="flex justify-center">
+                                            {`Error fetching events: ${eventsStore.error?.message}`}
+                                        </Text>
+                                        <Button onClick={fetchData}>Retry</Button>
                                     </div>
                                 </td>
                             </tr>
@@ -104,7 +108,7 @@ export const AdminRoute: React.FC = observer(() => {
                                         <td>{dbEvent.latitude}</td>
                                         <td>{dbEvent.longitude}</td>
                                         <td>
-                                            <Button disabled={eventsStore.isIdDisabled[index]} onClick={() => eventsStore.deleteEvent(index)}>
+                                            <Button disabled={eventsStore.isSavingId[index]} onClick={() => eventsStore.deleteEvent(index)}>
                                                 -
                                             </Button>
                                         </td>
