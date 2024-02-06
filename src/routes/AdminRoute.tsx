@@ -12,11 +12,7 @@ export const AdminRoute: React.FC = observer(() => {
     const [eventsStore] = useState(() => new EventsStore())
 
     const fetchData = async () => {
-        try {
-            await eventsStore.getEvents()
-        } catch (error) {
-            alert(`Error fetching events: ${error.message}`)
-        }
+        await eventsStore.getEvents()
     }
 
     useEffect(() => {
