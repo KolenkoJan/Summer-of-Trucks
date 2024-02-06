@@ -15,7 +15,7 @@ export class EventsStore {
     isIdDisabled: boolean[] = []
     isButtonDisabled = false
     isLoading = false
-    error: Partial<Error> = {}
+    error: Error | undefined
 
     constructor() {
         makeAutoObservable(this)
@@ -54,7 +54,7 @@ export class EventsStore {
             await FirebaseApi.Events.delete(this.dbEvents[eventID].id)
             this.dbEvents.splice(eventID, 1)
         } catch (error) {
-            this.error = error
+            alert(error)
         } finally {
             this.isIdDisabled[eventID] = false
         }

@@ -16,11 +16,11 @@ export const AdminRoute: React.FC = observer(() => {
             try {
                 await eventsStore.getEvents()
             } catch (error) {
-                console.error(`Error fetching events: ${error.message}`)
+                alert(`Error fetching events: ${error.message}`)
             }
         }
         fetchData()
-    }, [eventsStore])
+    }, [eventsStore.getEvents])
 
     return (
         <div className="container padding-xl gap-xl">
@@ -77,17 +77,17 @@ export const AdminRoute: React.FC = observer(() => {
                         </tr>
                     </thead>
                     <tbody>
-                        {eventsStore.error ? (
+                        {eventsStore.error && eventsStore.error.message ? (
                             <tr>
-                                <td colSpan={6} className="loading-cell">
+                                <td colSpan={6}>
                                     <Text color="error-main" variant="body-s" className="flex justify-center">
-                                        {`Test ${eventsStore.error?.message}`}
+                                        {`Error fetching events: ${eventsStore.error?.message}`}
                                     </Text>
                                 </td>
                             </tr>
                         ) : eventsStore.isLoading ? (
                             <tr>
-                                <td colSpan={6} className="loading-cell">
+                                <td colSpan={6}>
                                     <div className="flex justify-center">
                                         <CircularLoader />
                                     </div>
