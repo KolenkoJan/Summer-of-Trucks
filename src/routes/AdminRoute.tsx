@@ -1,14 +1,23 @@
 import { observer } from "mobx-react-lite"
 import { Card } from "../components/cards/Card"
 import { TextField } from "../components/Inputs/textField/TextField"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { EventsStore } from "../stores/EventsStore"
 import { Button } from "../components"
 import { Table } from "../components/tables/Table"
 import { Text } from "../components/typography/Text"
+import { CircularLoader } from "../components/loaders/CircularLoader"
 
 export const AdminRoute: React.FC = observer(() => {
     const [eventsStore] = useState(() => new EventsStore())
+
+    const fetchData = async () => {
+        await eventsStore.getEvents()
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [eventsStore.getEvents])
 
     return (
         <div className="container padding-xl gap-xl">
@@ -47,10 +56,11 @@ export const AdminRoute: React.FC = observer(() => {
                     </div>
                 </div>
                 <div className="flex flex-column margin-top-xl justify-center items-center">
-                    <Button onClick={eventsStore.createEvent}>Objavi dogodek</Button>
+                    <Button disabled={eventsStore.isCreatingEvent || !eventsStore.eventSchema.isValid} onClick={eventsStore.createEvent}>
+                        Objavi dogodek
+                    </Button>
                 </div>
             </Card>
-
             <Card className="flex flex-column gap-l a-card">
                 <Table>
                     <thead>
@@ -64,24 +74,49 @@ export const AdminRoute: React.FC = observer(() => {
                         </tr>
                     </thead>
                     <tbody>
-                        {eventsStore.dbEvents.map((dbEvent, index) => (
-                            <tr key={dbEvent.title}>
-                                <td>{dbEvent.title}</td>
-                                <td>{dbEvent.description}</td>
-                                <td>{dbEvent.startDate}</td>
-                                <td>{dbEvent.address}</td>
-                                <td>{dbEvent.latitude}</td>
-                                <td>{dbEvent.longitude}</td>
-                                <td>
-                                    <Button onClick={() => eventsStore.deleteEvent(index)}>-</Button>
+                        {eventsStore.isLoadingEvents ? (
+                            <tr>
+                                <td colSpan={6}>
+                                    <div className="flex justify-center">
+                                        <CircularLoader />
+                                    </div>
                                 </td>
                             </tr>
-                        ))}
-
-                        {!eventsStore.dbEvents.length && (
+                        ) : eventsStore.gettingEventError && eventsStore.gettingEventError.message ? (
                             <tr>
-                                <td colSpan={2}>Ni objavljenih dogodkov!</td>
+                                <td colSpan={6}>
+                                    <div className="flex justify-center items-center gap-l">
+                                        <Text color="error-main" variant="body-s" className="flex justify-center">
+                                            {`Error fetching events: ${eventsStore.gettingEventError?.message}`}
+                                        </Text>
+                                        <Button onClick={fetchData}>Retry</Button>
+                                    </div>
+                                </td>
                             </tr>
+                        ) : (
+                            <>
+                                {eventsStore.dbEvents.map((dbEvent, index) => (
+                                    <tr key={dbEvent.id}>
+                                        <td>{dbEvent.title}</td>
+                                        <td>{dbEvent.description}</td>
+                                        <td>{dbEvent.startDate}</td>
+                                        <td>{dbEvent.address}</td>
+                                        <td>{dbEvent.latitude}</td>
+                                        <td>{dbEvent.longitude}</td>
+                                        <td>
+                                            <Button disabled={eventsStore.isDeletingEvent[index]} onClick={() => eventsStore.deleteEvent(index)}>
+                                                -
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                ))}
+
+                                {!eventsStore.dbEvents.length && (
+                                    <tr>
+                                        <td colSpan={6}>Ni objavljenih dogodkov!</td>
+                                    </tr>
+                                )}
+                            </>
                         )}
                     </tbody>
                 </Table>
