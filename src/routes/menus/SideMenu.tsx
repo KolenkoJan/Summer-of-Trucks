@@ -19,7 +19,7 @@ export const SideMenu: React.FC<ISideMenuProps> = observer(({ isSideMenuVisible 
                 <li>
                     <SideMenuNavLink to="/components">Components</SideMenuNavLink>
                 </li>
-                {AuthService.isAdmin && (
+                {AuthService.isAdminAuth && (
                     <li>
                         <SideMenuNavLink to="/example">Example</SideMenuNavLink>
                     </li>
