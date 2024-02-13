@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom"
 
 export const LogInRoute: React.FC = observer(() => {
     const navigate = useNavigate()
-
     return (
         <div className="container">
             <div className="container-login">

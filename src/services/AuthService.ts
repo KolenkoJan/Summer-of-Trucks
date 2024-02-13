@@ -9,75 +9,61 @@ class _AuthService {
     isAdminAuth = true
     gettingError: Error | undefined
     isGettingAuth = false
-    isGettingBackdrop = false
+    isGettingAuthData = false
     authenticatedUser: User | null = null // Added user property to store user information
     private readonly auth = auth
 
     constructor() {
-        makeAutoObservable(this, {}, { deep: false })
-        this.getUserAuth()
+        makeAutoObservable(this, {}, { deep: true })
+        this.isGettingUserAuth()
     }
 
-    async getUserAuth(): Promise<void> {
-        this.isGettingBackdrop = true
+    async isGettingUserAuth(): Promise<void> {
+        this.isGettingAuthData = true
         await sleep()
-        this.isGettingBackdrop = false
-        const storedUser = localStorage.getItem("user") // Retrieve user information from local storage
+        const storedUser = localStorage.getItem("user")
+        // Retrieve user information from local storage
 
-        try {
-            storedUser
-        } catch (error) {
-            this.gettingError = error
-            alert(`Error fetching user: ${this.gettingError?.message}`)
-        } finally {
-            if (storedUser) {
-                this.authenticatedUser = JSON.parse(storedUser)
-            }
+        if (storedUser) {
+            this.authenticatedUser = JSON.parse(storedUser)
         }
+        this.isGettingAuthData = false
     }
 
-    async signInWithGoogle(navigate: NavigateFunction): Promise<User | null> {
+    async signInWithGoogle(navigate: NavigateFunction): Promise<void> {
         this.isGettingAuth = true
-        await sleep()
         this.auth.useDeviceLanguage()
 
         try {
+            await sleep()
             const signInResult = await signInWithPopup(this.auth, new GoogleAuthProvider())
 
             if (signInResult.user) {
                 this.authenticatedUser = signInResult.user
                 localStorage.setItem("user", JSON.stringify(this.authenticatedUser)) // Add user information to local storage
-                navigate("/")
+                navigate("/dashboard")
             }
-            this.isGettingBackdrop = true
-            await sleep()
-
-            return signInResult.user
         } catch (error) {
-            this.gettingError = error
-            alert(`Error logging in: ${this.gettingError?.message}`)
-            return null
+            alert(`Error logging in: ${error.message}`)
         } finally {
+            await sleep()
             this.isGettingAuth = false
-            this.isGettingBackdrop = false
         }
     }
 
     async logout(navigate: NavigateFunction): Promise<void> {
-        this.isGettingBackdrop = true
-        await sleep()
-        const signOutResult = await signOut(this.auth)
-
+        this.isGettingAuth = true
         try {
-            signOutResult
-            this.authenticatedUser = null
+            await sleep()
+            await signOut(this.auth)
             localStorage.removeItem("user") // Remove user information from local storage
+            this.authenticatedUser = null
             navigate("")
         } catch (error) {
             this.gettingError = error
             alert(`Error: ${this.gettingError?.message}`)
         } finally {
-            this.isGettingBackdrop = false
+            this.isGettingAuth = false
         }
     }
 }

@@ -29,7 +29,6 @@ export class EventsStore {
 
     async createEvent() {
         this.eventSchema.validate(this.event)
-        this.isCreatingEvent = true
 
         if (!this.eventSchema.isValid) {
             alert("Validation failed!")
@@ -37,6 +36,7 @@ export class EventsStore {
         }
 
         try {
+            this.isCreatingEvent = true
             const event = await FirebaseApi.Events.create(this.event as IEvent)
             this.dbEvents.push(event)
             this.event = {}

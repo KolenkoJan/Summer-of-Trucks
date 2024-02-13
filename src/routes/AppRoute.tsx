@@ -26,6 +26,8 @@ const NotFoundRoute = observer(() => {
 })
 
 export const AppRoute = observer(() => {
+    const key = AuthService.authenticatedUser ? "authenticated" : "unauthenticated"
+
     let router: ReturnType<typeof createBrowserRouter>
 
     if (AuthService.authenticatedUser) {
@@ -34,7 +36,7 @@ export const AppRoute = observer(() => {
                 path: "/",
                 element: (
                     <>
-                        {AuthService.isGettingBackdrop ? <BackdropPage /> : undefined}
+                        {AuthService.isGettingAuth ? <BackdropPage /> : undefined}
                         <HomeRoute />
                     </>
                 ),
@@ -64,11 +66,11 @@ export const AppRoute = observer(() => {
     } else {
         router = createBrowserRouter([
             {
-                path: "",
+                path: "/",
                 element: (
                     <>
-                        {AuthService.isGettingBackdrop ? <InovaLoadingPage /> : undefined}
-                        <LogInRoute />,
+                        {AuthService.isGettingAuthData ? <InovaLoadingPage /> : undefined}
+                        <LogInRoute />
                     </>
                 ),
                 errorElement: <NotFoundRoute />,
@@ -76,5 +78,5 @@ export const AppRoute = observer(() => {
         ])
     }
 
-    return <RouterProvider router={router} />
+    return <RouterProvider key={key} router={router} />
 })
