@@ -12,6 +12,10 @@ export class EventsStore {
     event: Partial<IEvent> = {}
     validationResult: ValidationResult | undefined = undefined
     eventSchema = JoiSchema(getEventSchema())
+    isDeletingEvent: boolean[] = []
+    isCreatingEvent = false
+    isLoadingEvents = false
+    gettingEventError: Error | undefined
 
     constructor() {
         makeAutoObservable(this)
@@ -32,16 +36,39 @@ export class EventsStore {
         }
 
         try {
+            this.isCreatingEvent = true
             const event = await FirebaseApi.Events.create(this.event as IEvent)
             this.dbEvents.push(event)
             this.event = {}
             this.eventSchema.clear()
         } catch (error) {
-            alert(error.message)
+            alert(error)
+        } finally {
+            this.isCreatingEvent = false
         }
     }
 
-    deleteEvent(index: number) {
-        this.dbEvents.splice(index, 1)
+    async deleteEvent(eventID: number) {
+        this.isDeletingEvent[eventID] = true
+        try {
+            await FirebaseApi.Events.delete(this.dbEvents[eventID].id)
+            this.dbEvents.splice(eventID, 1)
+        } catch (error) {
+            alert(error)
+        } finally {
+            this.isDeletingEvent[eventID] = false
+        }
+    }
+
+    async getEvents() {
+        this.isLoadingEvents = true
+        try {
+            const events = await FirebaseApi.Events.getMany()
+            this.dbEvents = events
+        } catch (error) {
+            this.gettingEventError = error
+        } finally {
+            this.isLoadingEvents = false
+        }
     }
 }

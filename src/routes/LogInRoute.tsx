@@ -4,8 +4,11 @@ import { Card } from "../components/cards/Card"
 import { Text } from "../components/typography/Text"
 import { InovaLogoIcon } from "../icons"
 import { AuthService } from "../services"
+import { CircularLoader } from "../components/loaders/CircularLoader"
+import { useNavigate } from "react-router-dom"
 
 export const LogInRoute: React.FC = observer(() => {
+    const navigate = useNavigate()
     return (
         <div className="container">
             <div className="container-login">
@@ -19,7 +22,7 @@ export const LogInRoute: React.FC = observer(() => {
                             <Text> Vpišite se z računom google</Text>
                             <Button
                                 className="profile-button margin-top-xl"
-                                onClick={() => AuthService.logIn()}
+                                onClick={() => AuthService.signInWithGoogle(navigate)}
                                 leftIcon={
                                     <svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="-3 0 262 262" preserveAspectRatio="xMidYMid">
                                         <path
@@ -44,6 +47,7 @@ export const LogInRoute: React.FC = observer(() => {
                                 {" "}
                                 Vpiši se
                             </Button>
+                            {AuthService.isGettingAuth ? <CircularLoader /> : undefined}
                         </div>
                     </div>
                 </Card>

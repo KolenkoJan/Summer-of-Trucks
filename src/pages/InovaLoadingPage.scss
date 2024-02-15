@@ -1,0 +1,17 @@
+@import "../theme/ThemeDefault.scss";
+@import "../theme/Theme.scss";
+
+.loading-page {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    background-color: $paper;
+    color: #fff;
+    z-index: 1201;
+
+    .black {
+        stroke: black;
+    }
+}

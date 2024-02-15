@@ -8,6 +8,8 @@ import { useEffect } from "react"
 import { AdminRoute } from "./AdminRoute"
 import { ProfileRoute } from "./ProfileRoute"
 import { DashboardRoute } from "./DashboardRoute"
+import { BackdropPage } from "../pages/BackdropPage"
+import { InovaLoadingPage } from "../pages/InovaLoadingPage"
 
 /**
  * Navigates back
@@ -24,13 +26,20 @@ const NotFoundRoute = observer(() => {
 })
 
 export const AppRoute = observer(() => {
+    const key = AuthService.authenticatedUser ? "authenticated" : "unauthenticated"
+
     let router: ReturnType<typeof createBrowserRouter>
 
-    if (AuthService.isLoggedIn) {
+    if (AuthService.authenticatedUser) {
         router = createBrowserRouter([
             {
-                path: "",
-                element: <HomeRoute />,
+                path: "/",
+                element: (
+                    <>
+                        {AuthService.isGettingAuth ? <BackdropPage /> : undefined}
+                        <HomeRoute />
+                    </>
+                ),
                 errorElement: <NotFoundRoute />,
                 children: [
                     {
@@ -38,14 +47,14 @@ export const AppRoute = observer(() => {
                         element: <ComponentsRoute />,
                     },
                     {
-                        path: "",
+                        path: "/",
                         element: <DashboardRoute />,
                     },
                     {
                         path: "profile",
                         element: <ProfileRoute />,
                     },
-                    AuthService.isAdmin
+                    AuthService.isAdminAuth
                         ? {
                               path: "example",
                               element: <AdminRoute />,
@@ -57,12 +66,17 @@ export const AppRoute = observer(() => {
     } else {
         router = createBrowserRouter([
             {
-                path: "",
-                element: <LogInRoute />,
+                path: "/",
+                element: (
+                    <>
+                        {AuthService.isGettingAuthData ? <InovaLoadingPage /> : undefined}
+                        <LogInRoute />
+                    </>
+                ),
                 errorElement: <NotFoundRoute />,
             },
         ])
     }
 
-    return <RouterProvider router={router} />
+    return <RouterProvider key={key} router={router} />
 })
