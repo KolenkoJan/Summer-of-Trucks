@@ -22,7 +22,7 @@ export class EventsStore {
         this.createEvent = this.createEvent.bind(this)
     }
 
-    setEvent<K extends keyof IEvent, V extends IEvent[K]>(key: K, value: V) {
+    setEvent<K extends keyof IEvent, V extends IEvent[K]>(key: K, value: V | File) {
         this.event[key] = value
         this.eventSchema.validateKey(key, this.event)
     }
@@ -39,6 +39,7 @@ export class EventsStore {
             this.isCreatingEvent = true
             const event = await FirebaseApi.Events.create(this.event as IEvent)
             this.dbEvents.push(event)
+            console.log(this.event)
             this.event = {}
             this.eventSchema.clear()
         } catch (error) {
