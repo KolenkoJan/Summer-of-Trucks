@@ -29,12 +29,28 @@ export const TextField = observer(<T extends TextFieldType = "text">({ label, on
             case "number":
                 onChange?.(Number(value) as TextFieldValueType<T>)
                 break
+            /*
+            case "file":
+                {
+                    const fileInput = e.target as HTMLInputElement
+                    const files = fileInput.files
+                    console.log(files)
+
+                    if (files && files.length > 0) {
+                        const selectedFile = files[0]
+                        onChange?.(selectedFile as TextFieldValueType<T>)
+                    } else {
+                        onChange?.(undefined as unknown as TextFieldValueType<T>)
+                    }
+                }
+                break */
             default:
                 console.log("Type Error")
         }
     }
 
     const showError = schemaRule?.isValidated && schemaRule?.errors && schemaRule.errors.length > 0
+    const fileClass = type === "file" ? "file-input" : ""
 
     return (
         <div className="flex flex-column gap-l">
@@ -46,7 +62,7 @@ export const TextField = observer(<T extends TextFieldType = "text">({ label, on
                     </Text>
                 )}
             </div>
-            <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className} ${showError ? "error" : ""}`} />
+            <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${fileClass} ${className} ${showError ? "error" : ""}`} />
             {showError && (
                 <Text color="error-main" className="message" variant="body-s">
                     {schemaRule?.errors?.[0].message}

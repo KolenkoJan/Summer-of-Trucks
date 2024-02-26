@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouterProvider, useLocation, useNavigate } from "react-router-dom"
-import { ComponentsRoute } from "./ComponentsRoute"
 import { LogInRoute } from "./LogInRoute"
 import { observer } from "mobx-react-lite"
 import { AuthService } from "../services"
@@ -10,6 +9,7 @@ import { ProfileRoute } from "./ProfileRoute"
 import { DashboardRoute } from "./DashboardRoute"
 import { BackdropPage } from "../pages/BackdropPage"
 import { InovaLoadingPage } from "../pages/InovaLoadingPage"
+import { ScanRoute } from "./ScanRoute"
 
 /**
  * Navigates back
@@ -26,26 +26,22 @@ const NotFoundRoute = observer(() => {
 })
 
 export const AppRoute = observer(() => {
-    const key = AuthService.authenticatedUser ? "authenticated" : "unauthenticated"
+    const key = AuthService.authenticatedUser || AuthService.isAdminAuth ? "authenticated" : "unauthenticated"
 
     let router: ReturnType<typeof createBrowserRouter>
 
-    if (AuthService.authenticatedUser) {
+    if (AuthService.authenticatedUser || AuthService.isAdminAuth) {
         router = createBrowserRouter([
             {
                 path: "/",
                 element: (
                     <>
-                        {AuthService.isGettingAuth ? <BackdropPage /> : undefined}
+                        {AuthService.isGettingAuth || AuthService.isGettingAuthData ? <BackdropPage /> : undefined}
                         <HomeRoute />
                     </>
                 ),
                 errorElement: <NotFoundRoute />,
                 children: [
-                    {
-                        path: "components",
-                        element: <ComponentsRoute />,
-                    },
                     {
                         path: "/",
                         element: <DashboardRoute />,
@@ -56,10 +52,13 @@ export const AppRoute = observer(() => {
                     },
                     AuthService.isAdminAuth
                         ? {
-                              path: "example",
+                              path: "admin",
                               element: <AdminRoute />,
                           }
-                        : {},
+                        : {
+                              path: "scan",
+                              element: <ScanRoute />,
+                          },
                 ],
             },
         ])

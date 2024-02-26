@@ -8,7 +8,7 @@ interface IButtonIconProps {
 
 export const ButtonIcon: React.FC<IButtonIconProps> = ({ onClick, children, className }) => {
     return (
-        <button className={`${className} button-icon`} onClick={onClick}>
+        <button className={`button-icon ${className}`} onClick={onClick}>
             {children}
         </button>
     )

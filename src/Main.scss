@@ -48,60 +48,8 @@ body, #root {
     }
 }
 
-.flex-container {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    overflow: auto;
-}
-
-.flex-layout {
-    display: flex;
-    flex: 1;
-    overflow: auto;
-}   
-
-.container {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    align-items: flex-start;
-    overflow: auto;
-}
-
-.container-login {
-    align-self: center;
-    margin: auto;
-}
-
-.profile-page {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-}
-
-.side-menu-div {
-    display: flex;
-    overflow: auto;
-}
-
 .profile-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
-}
-
-
-.flex-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0;
 }
 
 .center-content {
@@ -125,8 +73,4 @@ body, #root {
 .text-size {
     font-size: 40px;
     text-align: center;
-}
-
-.a-card {
-    width: 800px;
 }
