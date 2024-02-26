@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite"
 import "./Avatar.scss"
 
 interface IAvatarProps {
-    source: string | undefined
+    source?: string
     size?: ThemeSize
     onClick?: () => void
     className?: string

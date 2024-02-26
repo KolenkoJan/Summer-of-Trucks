@@ -50,7 +50,6 @@ export const TextField = observer(<T extends TextFieldType = "text">({ label, on
     }
 
     const showError = schemaRule?.isValidated && schemaRule?.errors && schemaRule.errors.length > 0
-    const fileClass = type === "file" ? "file-input" : ""
 
     return (
         <div className="flex flex-column gap-l">
@@ -62,7 +61,7 @@ export const TextField = observer(<T extends TextFieldType = "text">({ label, on
                     </Text>
                 )}
             </div>
-            <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${fileClass} ${className} ${showError ? "error" : ""}`} />
+            <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className} ${showError ? "error" : ""}`} />
             {showError && (
                 <Text color="error-main" className="message" variant="body-s">
                     {schemaRule?.errors?.[0].message}

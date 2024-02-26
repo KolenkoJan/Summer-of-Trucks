@@ -4,12 +4,11 @@ import "../../routes/menus/SideMenu.scss"
 
 interface ISideMenuNavLinkProps extends NavLinkProps {
     children?: React.ReactNode
-    onClick?: () => void
 }
 
-export const SideMenuNavLink: React.FC<ISideMenuNavLinkProps> = ({ children, onClick, ...rest }) => {
+export const SideMenuNavLink: React.FC<ISideMenuNavLinkProps> = ({ children, ...rest }) => {
     return (
-        <NavLink {...rest} onClick={onClick}>
+        <NavLink {...rest}>
             <Text variant="body-s" color="text-secondary" className="text-hover">
                 {children}
             </Text>

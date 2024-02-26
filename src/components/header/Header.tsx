@@ -24,7 +24,7 @@ export const Header: React.FC<IHeaderProps> = observer(({ isSideMenuVisible }) =
             </div>
             <div className="flex-right">
                 <Avatar size="l" source={AuthService.authenticatedUser?.photoURL || undefined} onClick={() => navigate("/profile")} />
-                {!AuthService.isAdminAuth ? undefined : (
+                {AuthService.isAdminAuth && (
                     <Button className="button-header-hidden" onClick={() => navigate("/admin")}>
                         Ustvari dogodek
                     </Button>
