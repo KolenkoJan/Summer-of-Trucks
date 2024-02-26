@@ -39,6 +39,7 @@ export class EventsStore {
             this.isCreatingEvent = true
             const event = await FirebaseApi.Events.create(this.event as IEvent)
             this.dbEvents.push(event)
+            console.log(this.event)
             this.event = {}
             this.eventSchema.clear()
         } catch (error) {

@@ -78,8 +78,12 @@ $gaps: gap, column-gap, row-gap;
     .#{$attribute}-#{$size} {
       #{$attribute}: $size;
     }
-  };
-};
+  }
+
+  ;
+}
+
+;
 
 // Flex directions
 
@@ -91,9 +95,29 @@ $flex-directions: row, column, row-reverse, column-reverse;
   }
 }
 
+// Flex grow and shrink
+
+$flex-grow: 0, 1, auto, none;
+
+@each $value in $flex-grow {
+  .flex-#{$value} {
+    flex: $value;
+  }
+}
+
+// Overflow 
+
+$overflow-values: auto, hidden, clip, visible, scroll;
+
+@each $value in $overflow-values {
+    .overflow-#{$value} {
+      overflow: $value;
+    }
+}
+
 // Justify-content
 
-$justify-content: center, space-between, space-around, space-evenly, start, end; 
+$justify-content: center, space-between, space-around, space-evenly, start, end;
 
 @each $value in $justify-content {
   .justify-#{$value} {
@@ -110,4 +134,3 @@ $align-content: center, flex-start, flex-end, baseline, stretch;
     align-items: $attribute;
   }
 }
-

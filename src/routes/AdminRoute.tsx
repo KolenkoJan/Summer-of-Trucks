@@ -7,6 +7,8 @@ import { Button } from "../components"
 import { Table } from "../components/tables/Table"
 import { Text } from "../components/typography/Text"
 import { CircularLoader } from "../components/loaders/CircularLoader"
+import QRCode from "react-qr-code"
+import { PageContainer } from "../components/other/PageContainer"
 
 export const AdminRoute: React.FC = observer(() => {
     const [eventsStore] = useState(() => new EventsStore())
@@ -20,8 +22,8 @@ export const AdminRoute: React.FC = observer(() => {
     }, [eventsStore.getEvents])
 
     return (
-        <div className="container padding-xl gap-xl">
-            <Card className="flex flex-column gap-l a-card">
+        <PageContainer>
+            <Card className="gap-l">
                 <Text variant="title-l">Generalne informacije</Text>
                 <TextField
                     schemaRule={eventsStore.eventSchema.getRule("title")}
@@ -47,7 +49,7 @@ export const AdminRoute: React.FC = observer(() => {
                 <Text variant="title-l">Lokacija dogodka</Text>
                 <Text variant="body-s">Ima dogodek fizično lokacijo?</Text>
                 <TextField placeholder="Naslov..." label="Fizični naslov dogodka" onChange={(value) => eventsStore.setEvent("address", value)} value={eventsStore.event.address} />
-                <div className="flex gap-l">
+                <div className="card-flex-row-lg flex flex-column gap-l">
                     <div className="flex flex-column gap-l">
                         <TextField placeholder="Latitude..." label="Latitude" type="number" onChange={(value) => eventsStore.setEvent("latitude", value)} value={eventsStore.event.latitude} />
                     </div>
@@ -55,13 +57,15 @@ export const AdminRoute: React.FC = observer(() => {
                         <TextField placeholder="Longitude" label="Longitude" type="number" onChange={(value) => eventsStore.setEvent("longitude", value)} value={eventsStore.event.longitude} />
                     </div>
                 </div>
+                <TextField schemaRule={eventsStore.eventSchema.getRule("photo")} type="file" />
                 <div className="flex flex-column margin-top-xl justify-center items-center">
                     <Button disabled={eventsStore.isCreatingEvent || !eventsStore.eventSchema.isValid} onClick={eventsStore.createEvent}>
                         Objavi dogodek
                     </Button>
                 </div>
             </Card>
-            <Card className="flex flex-column gap-l a-card">
+            <Card className="gap-xl">
+                <Text variant="title-l">Vsi dogodki</Text>
                 <Table>
                     <thead>
                         <tr>
@@ -71,6 +75,7 @@ export const AdminRoute: React.FC = observer(() => {
                             <th>Address</th>
                             <th>Latitude</th>
                             <th>Longitude</th>
+                            <th>QR Code</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -104,6 +109,9 @@ export const AdminRoute: React.FC = observer(() => {
                                         <td>{dbEvent.latitude}</td>
                                         <td>{dbEvent.longitude}</td>
                                         <td>
+                                            <QRCode value={dbEvent.id} style={{ height: "auto", width: "50px" }} />
+                                        </td>
+                                        <td>
                                             <Button disabled={eventsStore.isDeletingEvent[index]} onClick={() => eventsStore.deleteEvent(index)}>
                                                 -
                                             </Button>
@@ -121,6 +129,6 @@ export const AdminRoute: React.FC = observer(() => {
                     </tbody>
                 </Table>
             </Card>
-        </div>
+        </PageContainer>
     )
 })

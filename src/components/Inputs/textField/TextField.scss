@@ -1,5 +1,19 @@
 @import "/src/theme/Theme.scss";
 
+input[type="file"] {
+    padding: 0;
+    border: none;
+    z-index: 10;
+    
+    :hover {
+        display: none;
+    }
+
+    &:focus {
+        display: none;
+    }
+}
+
 .base-input {
     display: flex;
     padding: $spacing-l $spacing-m;
@@ -8,8 +22,6 @@
     line-height: 23px;
     border-radius: $border-radius;
     border: 1px solid rgba($grey-900, 0.3);
-    
-    
 
     &::placeholder {
         color: $text-secondary;

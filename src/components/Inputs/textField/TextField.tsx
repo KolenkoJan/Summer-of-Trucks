@@ -29,6 +29,20 @@ export const TextField = observer(<T extends TextFieldType = "text">({ label, on
             case "number":
                 onChange?.(Number(value) as TextFieldValueType<T>)
                 break
+            /*
+            case "file":
+                {
+                    const fileInput = e.target.files
+
+                    if (fileInput && fileInput.length > 0) {
+                        const selectedFile = fileInput[0]
+                        onChange?.(selectedFile as File)
+                    } else {
+                        onChange?.(undefined as unknown as TextFieldValueType<T>)
+                    }
+                }
+                break
+                */
             default:
                 console.log("Type Error")
         }

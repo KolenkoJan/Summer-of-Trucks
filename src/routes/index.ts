@@ -1,4 +1,3 @@
-export * from "./ComponentsRoute"
 export * from "./AdminRoute"
 export * from "./ProfileRoute"
 export * from "./LogInRoute"
