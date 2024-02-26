@@ -22,7 +22,7 @@ export class EventsStore {
         this.createEvent = this.createEvent.bind(this)
     }
 
-    setEvent<K extends keyof IEvent, V extends IEvent[K]>(key: K, value: V | File) {
+    setEvent<K extends keyof IEvent, V extends IEvent[K]>(key: K, value: V) {
         this.event[key] = value
         this.eventSchema.validateKey(key, this.event)
     }

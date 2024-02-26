@@ -9,7 +9,7 @@ type TextFieldType = "text" | "number" | "date" | "file"
 type TextFieldValueType<T extends TextFieldType> = T extends "number" ? number : string
 
 interface ITextFieldProps<T extends TextFieldType = "text"> {
-    onChange?: (value: TextFieldValueType<T> | File) => void
+    onChange?: (value: TextFieldValueType<T>) => void
     placeholder?: string
     value?: TextFieldValueType<T>
     className?: string
@@ -29,6 +29,7 @@ export const TextField = observer(<T extends TextFieldType = "text">({ label, on
             case "number":
                 onChange?.(Number(value) as TextFieldValueType<T>)
                 break
+            /*
             case "file":
                 {
                     const fileInput = e.target.files
@@ -41,6 +42,7 @@ export const TextField = observer(<T extends TextFieldType = "text">({ label, on
                     }
                 }
                 break
+                */
             default:
                 console.log("Type Error")
         }
