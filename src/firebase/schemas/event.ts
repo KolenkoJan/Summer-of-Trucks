@@ -9,5 +9,7 @@ export const getEventSchema = () => {
         address: Joi.string().allow(""),
         latitude: Joi.number(),
         longitude: Joi.number(),
+        photo: Joi.object(),
+        userIds: Joi.array().items(Joi.string()).optional(),
     }).required()
 }

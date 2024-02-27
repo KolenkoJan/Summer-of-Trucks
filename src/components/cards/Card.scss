@@ -1,9 +1,23 @@
 @import "../../theme/Theme.scss";
 
 .card {
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
     padding: $spacing-l;
     background-color: $paper;
     border-radius: $border-radius;
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, 0.12);
+
+    @media screen and (min-width: 640px) {
+        .card-flex-row-lg {
+            display: flex;
+            flex-direction: row;
+        }   
+    }
+
+    @media screen and (max-width: 640px) {
+        overflow: auto;
+    }
 }
