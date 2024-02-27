@@ -20,29 +20,24 @@ interface ITextFieldProps<T extends TextFieldType = "text"> {
 
 export const TextField = observer(<T extends TextFieldType = "text">({ label, onChange, placeholder, value, className, schemaRule, type = "text" as T }: ITextFieldProps<T>) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value
         switch (type) {
             case "text":
             case "date":
-                onChange?.(value as TextFieldValueType<T>)
+                onChange?.(e.target.value as TextFieldValueType<T>)
                 break
             case "number":
-                onChange?.(Number(value) as TextFieldValueType<T>)
+                onChange?.(Number(e.target.value) as TextFieldValueType<T>)
                 break
             /*
-            case "file":
-                {
-                    const fileInput = e.target.files
+            case "file": {
+                const fileInput = e.target.files
 
-                    if (fileInput && fileInput.length > 0) {
-                        const selectedFile = fileInput[0]
-                        onChange?.(selectedFile as File)
-                    } else {
-                        onChange?.(undefined as unknown as TextFieldValueType<T>)
-                    }
+                if (fileInput && fileInput.length > 0) {
+                    const selectedFile = fileInput[0]
+                    onChange?.(selectedFile as TextFieldValueType<T>)
                 }
                 break
-                */
+            } */
             default:
                 console.log("Type Error")
         }

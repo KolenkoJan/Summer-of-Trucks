@@ -4,8 +4,8 @@ import { makeAutoObservable } from "mobx"
 import { IEvent } from "../firebase/interfaces"
 import { ValidationResult } from "joi"
 import { JoiSchema } from "../joi/JoiSchema"
-import { getEventSchema } from "../firebase/schemas/Event"
 import { FirebaseApi } from "../firebase/api"
+import { getEventSchema } from "../firebase/schemas"
 
 export class EventsStore {
     dbEvents: IEvent[] = []

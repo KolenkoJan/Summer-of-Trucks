@@ -57,7 +57,6 @@ export const AdminRoute: React.FC = observer(() => {
                         <TextField placeholder="Longitude" label="Longitude" type="number" onChange={(value) => eventsStore.setEvent("longitude", value)} value={eventsStore.event.longitude} />
                     </div>
                 </div>
-                <TextField schemaRule={eventsStore.eventSchema.getRule("photo")} type="file" />
                 <div className="flex flex-column margin-top-xl justify-center items-center">
                     <Button disabled={eventsStore.isCreatingEvent || !eventsStore.eventSchema.isValid} onClick={eventsStore.createEvent}>
                         Objavi dogodek
