@@ -8,4 +8,7 @@ export interface IEvent {
     address: string
     latitude: number
     longitude: number
+    userIds?: string[]
 }
+
+export type IEventSearchParams = Partial<Pick<IEvent, "id">>

@@ -10,5 +10,6 @@ export const getEventSchema = () => {
         latitude: Joi.number(),
         longitude: Joi.number(),
         photo: Joi.object(),
+        userIds: Joi.array().items(Joi.string()).optional(),
     }).required()
 }

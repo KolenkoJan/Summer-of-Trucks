@@ -1,7 +1,9 @@
-import { GoogleAuthProvider, type User, signInWithPopup, signOut } from "firebase/auth"
+import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
 import { makeAutoObservable } from "mobx"
 import { type NavigateFunction } from "react-router-dom"
-import { auth } from "../firebase"
+import { Interfaces, auth } from "../firebase"
+import { FirebaseApi } from "../firebase/api"
+import { HTTPStatusCode } from "../firebase/error"
 
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000))
 
@@ -10,7 +12,7 @@ class _AuthService {
     gettingError: Error | undefined
     isGettingAuth = false
     isGettingAuthData = false
-    authenticatedUser: User | undefined // Added user property to store user information
+    authenticatedUser: Interfaces.IUser | undefined // Added user property to store user information
     private readonly auth = auth
 
     constructor() {
@@ -42,10 +44,21 @@ class _AuthService {
 
         try {
             await sleep()
+
             const signInResult = await signInWithPopup(this.auth, new GoogleAuthProvider())
 
+            if (!signInResult.user.displayName || !signInResult.user.email || !signInResult.user.photoURL) {
+                throw new Error(HTTPStatusCode[400])
+            }
+
+            const user = await FirebaseApi.User.create({
+                displayName: signInResult.user.displayName!,
+                email: signInResult.user.email!,
+                photoURL: signInResult.user.photoURL!,
+            })
+
             if (signInResult.user) {
-                this.authenticatedUser = signInResult.user
+                this.authenticatedUser = user
                 localStorage.setItem("user", JSON.stringify(this.authenticatedUser))
                 navigate("/dashboard")
             }
@@ -65,8 +78,18 @@ class _AuthService {
             await sleep()
             const signInResult = await signInWithPopup(this.auth, new GoogleAuthProvider())
 
+            if (!signInResult.user.displayName || !signInResult.user.email || !signInResult.user.photoURL) {
+                throw new Error(HTTPStatusCode[400])
+            }
+
+            const user = await FirebaseApi.User.create({
+                displayName: signInResult.user.displayName!,
+                email: signInResult.user.email!,
+                photoURL: signInResult.user.photoURL!,
+            })
+
             if (signInResult.user) {
-                this.authenticatedUser = signInResult.user
+                this.authenticatedUser = user
                 localStorage.setItem("user", JSON.stringify(this.authenticatedUser))
                 this.isAdminAuth = true
                 localStorage.setItem("isAdmin", "true")

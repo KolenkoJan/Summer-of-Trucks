@@ -1,14 +1,13 @@
-import { type User } from "firebase/auth"
-import { IEvent, IParticipatedEventItem, IUserCollectionItem } from "../firebase/interfaces"
+import { type User as AuthUser } from "firebase/auth"
+import { IEvent, IParticipatedEventItem, IUser } from "../firebase/interfaces"
 
 class FirebaseMapper {
-    mapGoogleUserToUser(user: User): IUserCollectionItem {
+    mapGoogleUserToUser(user: AuthUser): IUser {
         return {
-            photoURL: user.photoURL,
-            userId: user.uid,
-            email: user.email,
-            displayName: user.displayName,
-            events: [],
+            id: "",
+            photoURL: user.photoURL!,
+            email: user.email!,
+            displayName: user.displayName!,
         }
     }
 

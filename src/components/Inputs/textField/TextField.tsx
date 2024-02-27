@@ -6,10 +6,10 @@ import React from "react"
 
 type TextFieldType = "text" | "number" | "date" | "file"
 
-type TextFieldValueType<T extends TextFieldType> = T extends "number" ? number : string
+type TextFieldValueType<T extends TextFieldType> = T extends "number" ? number : T extends "file" ? File : string
 
 interface ITextFieldProps<T extends TextFieldType = "text"> {
-    onChange?: (value: TextFieldValueType<T> | File) => void
+    onChange?: (value: TextFieldValueType<T>) => void
     placeholder?: string
     value?: TextFieldValueType<T>
     className?: string
@@ -35,9 +35,7 @@ export const TextField = observer(<T extends TextFieldType = "text">({ label, on
 
                     if (fileInput && fileInput.length > 0) {
                         const selectedFile = fileInput[0]
-                        onChange?.(selectedFile as File)
-                    } else {
-                        onChange?.(undefined as unknown as TextFieldValueType<T>)
+                        onChange?.(selectedFile as TextFieldValueType<T>)
                     }
                 }
                 break
@@ -58,7 +56,7 @@ export const TextField = observer(<T extends TextFieldType = "text">({ label, on
                     </Text>
                 )}
             </div>
-            <input type={type} placeholder={placeholder} onChange={handleChange} value={value || ""} className={`base-input ${className} ${showError ? "error" : ""}`} />
+            <input type={type} placeholder={placeholder} onChange={handleChange} value={value instanceof File ? "" : value} className={`base-input ${className} ${showError ? "error" : ""}`} />
             {showError && (
                 <Text color="error-main" className="message" variant="body-s">
                     {schemaRule?.errors?.[0].message}
