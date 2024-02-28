@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc, query, where, QueryConstraint } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, where, QueryConstraint, setDoc } from "firebase/firestore"
 import { Interfaces, db } from ".."
 import { HTTPStatusCode } from "../error"
 
@@ -32,9 +32,7 @@ export const Events = {
 
     async update(eventId: string, body: Interfaces.IEvent) {
         await sleep()
-        await updateDoc(doc(db, c, eventId), {
-            body,
-        })
+        await setDoc(doc(db, c, eventId), body)
         return this.getOne(body.id)
     },
 

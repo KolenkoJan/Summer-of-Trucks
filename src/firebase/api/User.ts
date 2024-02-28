@@ -1,4 +1,4 @@
-import { QueryConstraint, query, addDoc, collection, deleteDoc, doc, getDoc, getDocs, limit, updateDoc, where } from "firebase/firestore"
+import { QueryConstraint, query, addDoc, collection, deleteDoc, doc, getDoc, getDocs, limit, where, setDoc } from "firebase/firestore"
 import { Interfaces, db } from ".."
 import { HTTPStatusCode } from "../error"
 
@@ -48,9 +48,7 @@ export const User = {
 
     async update(userId: string, body: Interfaces.IUser) {
         await sleep()
-        await updateDoc(doc(db, c, userId), {
-            body,
-        })
+        await setDoc(doc(db, c, userId), body)
         return this.getOne({ id: body.id })
     },
 
