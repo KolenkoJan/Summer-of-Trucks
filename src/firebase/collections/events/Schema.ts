@@ -1,8 +1,8 @@
 import Joi from "joi"
-import { IEvent } from "../interfaces"
+import { IEvent } from "./Interface"
 
-export const getEventSchema = () => {
-    return Joi.object<IEvent>({
+export const EventSchema = () =>
+    Joi.object<IEvent>({
         title: Joi.string().required(),
         description: Joi.string().required(),
         startDate: Joi.date().greater("now").required(),
@@ -12,4 +12,3 @@ export const getEventSchema = () => {
         photo: Joi.object(),
         userIds: Joi.array().items(Joi.string()).optional(),
     }).required()
-}

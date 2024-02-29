@@ -6,4 +6,6 @@ export interface IUser {
     isAdmin?: boolean
 }
 
+// Computed
+
 export type IUserSearchParams = Partial<Pick<IUser, "id" | "email">>

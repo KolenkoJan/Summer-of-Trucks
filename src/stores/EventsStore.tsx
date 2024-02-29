@@ -1,17 +1,15 @@
 // EventsStore.ts
 
 import { makeAutoObservable } from "mobx"
-import { IEvent } from "../firebase/interfaces"
 import { ValidationResult } from "joi"
 import { JoiSchema } from "../joi/JoiSchema"
-import { FirebaseApi } from "../firebase/api"
-import { getEventSchema } from "../firebase/schemas"
+import { Interfaces, firebase } from "../firebase"
 
 export class EventsStore {
-    dbEvents: IEvent[] = []
-    event: Partial<IEvent> = {}
+    dbEvents: Interfaces.IEvent[] = []
+    event: Partial<Interfaces.IEvent> = {}
     validationResult: ValidationResult | undefined = undefined
-    eventSchema = JoiSchema(getEventSchema())
+    eventSchema = JoiSchema(firebase.schema.event())
     isDeletingEvent: boolean[] = []
     isCreatingEvent = false
     isLoadingEvents = false
@@ -22,7 +20,7 @@ export class EventsStore {
         this.createEvent = this.createEvent.bind(this)
     }
 
-    setEvent<K extends keyof IEvent, V extends IEvent[K]>(key: K, value: V) {
+    setEvent<K extends keyof Interfaces.IEvent, V extends Interfaces.IEvent[K]>(key: K, value: V) {
         this.event[key] = value
         this.eventSchema.validateKey(key, this.event)
     }
@@ -37,7 +35,7 @@ export class EventsStore {
 
         try {
             this.isCreatingEvent = true
-            const event = await FirebaseApi.Events.create(this.event as IEvent)
+            const event = await firebase.api.events.create(this.event as Interfaces.IEvent)
             this.dbEvents.push(event)
             console.log(this.event)
             this.event = {}
@@ -52,7 +50,7 @@ export class EventsStore {
     async deleteEvent(eventID: number) {
         this.isDeletingEvent[eventID] = true
         try {
-            await FirebaseApi.Events.delete(this.dbEvents[eventID].id)
+            await firebase.api.events.delete(this.dbEvents[eventID].id)
             this.dbEvents.splice(eventID, 1)
         } catch (error) {
             alert(error)
@@ -64,7 +62,7 @@ export class EventsStore {
     async getEvents() {
         this.isLoadingEvents = true
         try {
-            const events = await FirebaseApi.Events.getMany()
+            const events = await firebase.api.events.getMany()
             this.dbEvents = events
         } catch (error) {
             this.gettingEventError = error

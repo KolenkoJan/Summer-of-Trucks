@@ -11,4 +11,6 @@ export interface IEvent {
     userIds?: string[]
 }
 
+// Computed
+
 export type IEventSearchParams = Partial<Pick<IEvent, "id">>
