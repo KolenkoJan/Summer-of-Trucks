@@ -1,12 +1,13 @@
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, where, QueryConstraint, setDoc } from "firebase/firestore"
-import { Interfaces, db } from ".."
-import { HTTPStatusCode } from "../error"
+import { Interfaces, db } from "../.."
+import { HTTPStatusCode } from "../../error"
+import { EventSchema } from "./Schema"
 
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000)) // 1 second
 
-const c = "events" // collection
+const CollectionKey = "events" // collection
 
-export const Events = {
+export const EventsApi = {
     async getMany(searchParams?: Interfaces.IEventSearchParams) {
         await sleep()
 
@@ -15,30 +16,40 @@ export const Events = {
             queryConstraints.push(where("userIds", "array-contains", searchParams.id))
         }
 
-        const snapshot = await getDocs(searchParams ? query(collection(db, c), ...queryConstraints) : collection(db, c))
+        const snapshot = await getDocs(searchParams ? query(collection(db, CollectionKey), ...queryConstraints) : collection(db, CollectionKey))
         return snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }) as Interfaces.IEvent)
     },
 
     async getOne(eventId: string) {
-        const snapshot = await getDoc(doc(db, c, eventId))
+        const snapshot = await getDoc(doc(db, CollectionKey, eventId))
         return { ...snapshot.data(), id: snapshot.id } as Interfaces.IEvent
     },
 
-    async create(body: Interfaces.IEvent) {
+    async create(body: Omit<Interfaces.IEvent, "id">) {
+        const schemaResult = EventSchema().validate(body)
+        if (schemaResult.error) {
+            throw new Error(HTTPStatusCode[400])
+        }
+
         await sleep()
-        const doc = await addDoc(collection(db, c), body)
+        const doc = await addDoc(collection(db, CollectionKey), body)
         return this.getOne(doc.id)
     },
 
-    async update(eventId: string, body: Interfaces.IEvent) {
+    async update(eventId: string, body: Omit<Interfaces.IEvent, "id">) {
+        const schemaResult = EventSchema().validate(body)
+        if (schemaResult.error) {
+            throw new Error(HTTPStatusCode[400])
+        }
+
         await sleep()
-        await setDoc(doc(db, c, eventId), body)
-        return this.getOne(body.id)
+        await setDoc(doc(db, CollectionKey, eventId), body)
+        return this.getOne(eventId)
     },
 
     async delete(eventId: string) {
         await sleep()
-        return deleteDoc(doc(db, c, eventId))
+        return deleteDoc(doc(db, CollectionKey, eventId))
     },
 
     async assignUserToEvent(eventId: string, userId: string) {

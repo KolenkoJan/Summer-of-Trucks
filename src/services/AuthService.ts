@@ -1,8 +1,7 @@
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
 import { makeAutoObservable } from "mobx"
 import { type NavigateFunction } from "react-router-dom"
-import { Interfaces, auth } from "../firebase"
-import { FirebaseApi } from "../firebase/api"
+import { Interfaces, auth, firebase } from "../firebase"
 import { HTTPStatusCode } from "../firebase/error"
 import { UserStore } from "../stores/UserStore"
 
@@ -45,7 +44,7 @@ class _AuthService {
                 throw new Error(HTTPStatusCode[400])
             }
 
-            const user = await FirebaseApi.User.create({
+            const user = await firebase.api.users.create({
                 displayName: signInResult.user.displayName!,
                 email: signInResult.user.email!,
                 photoURL: signInResult.user.photoURL!,

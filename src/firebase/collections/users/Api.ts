@@ -1,12 +1,13 @@
 import { QueryConstraint, query, addDoc, collection, deleteDoc, doc, getDoc, getDocs, limit, where, setDoc } from "firebase/firestore"
-import { Interfaces, db } from ".."
-import { HTTPStatusCode } from "../error"
+import { Interfaces, db } from "../.."
+import { HTTPStatusCode } from "../../error"
+import { UserSchema } from "./Schema"
 
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000)) // 1 second
 
 const c = "users" // collection
 
-export const User = {
+export const UserApi = {
     async getOne(searchParams: Interfaces.IUserSearchParams) {
         if (!Object.keys(searchParams).length) {
             throw new Error("Search params must have at least one key-value pair.")
@@ -41,6 +42,11 @@ export const User = {
     async create(body: Omit<Interfaces.IUser, "id">) {
         await sleep()
 
+        const schemaResult = UserSchema().validate(body)
+        if (schemaResult.error) {
+            throw new Error(HTTPStatusCode[400])
+        }
+
         try {
             return await this.getOne({ email: body.email })
         } catch (error) {
@@ -53,10 +59,16 @@ export const User = {
         }
     },
 
-    async update(userId: string, body: Interfaces.IUser) {
+    async update(userId: string, body: Omit<Interfaces.IUser, "id">) {
         await sleep()
+
+        const schemaResult = UserSchema().validate(body)
+        if (schemaResult.error) {
+            throw new Error(HTTPStatusCode[400])
+        }
+
         await setDoc(doc(db, c, userId), body)
-        return this.getOne({ id: body.id })
+        return this.getOne({ id: userId })
     },
 
     async delete(userId: string) {

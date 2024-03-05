@@ -1,7 +1,6 @@
 import { makeAutoObservable } from "mobx"
-import { Interfaces } from "../firebase"
-import { FirebaseApi } from "../firebase/api"
-import { IUser } from "../firebase/interfaces"
+import { Interfaces, firebase } from "../firebase"
+import { IUser } from "../firebase/collections/interfaces"
 
 export class UserStore {
     users: Interfaces.IUser[] = []
@@ -21,7 +20,7 @@ export class UserStore {
     async updateUser(user: Interfaces.IUser) {
         this.isMakingUserAdmin[user.id] = true
         try {
-            await FirebaseApi.User.update(user.id, user)
+            await firebase.api.users.update(user.id, user)
         } catch (error) {
             alert(`Error updating user admin status: ${error.message}`)
         } finally {
@@ -32,7 +31,7 @@ export class UserStore {
     async isGettingUsersFromDatabase() {
         this.isGettingUsersFromDb = true
         try {
-            const users = await FirebaseApi.User.getMany()
+            const users = await firebase.api.users.getMany()
             this.users = users
         } catch (error) {
             alert(`Error: ${error.message}`)
@@ -44,7 +43,7 @@ export class UserStore {
     async removeUserFromDb(userID: number) {
         this.isDeletingUserFromDb[userID] = true
         try {
-            await FirebaseApi.User.delete(this.users[userID].id)
+            await firebase.api.users.delete(this.users[userID].id)
             this.users.splice(userID, 1)
         } catch (error) {
             alert(`Error: ${error.message}`)
