@@ -31,6 +31,13 @@ export const User = {
         return snapshot.docs?.map((doc) => ({ ...doc.data(), id: doc.id }) as Interfaces.IUser)?.[0] as Interfaces.IUser
     },
 
+    async getMany() {
+        await sleep()
+
+        const snapshot = await getDocs(collection(db, c))
+        return snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }) as Interfaces.IUser)
+    },
+
     async create(body: Omit<Interfaces.IUser, "id">) {
         await sleep()
 

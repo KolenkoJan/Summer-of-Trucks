@@ -35,6 +35,22 @@
             background-color: $primary-main;
             box-shadow: 0 1px 1px rgb(157, 157, 157);
         }
+
+        &:disabled {
+            + .slider {
+                background-color: rgba($grey-900, 0.12);
+                cursor: auto;
+
+                &:before {
+                    background-color: rgb(245, 245, 245);
+                }
+
+                .circle {
+                    background-color: rgb(245, 245, 245);
+                }
+
+            }
+        }
     }
 
 
@@ -66,6 +82,10 @@
             -webkit-transition: $animation-2;
             transition: $animation-2;
             box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+
+            &:disabled {
+                background-color: red;
+            }
         }
 
         //not checked button circle 

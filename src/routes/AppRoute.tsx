@@ -10,6 +10,7 @@ import { DashboardRoute } from "./DashboardRoute"
 import { BackdropPage } from "../pages/BackdropPage"
 import { InovaLoadingPage } from "../pages/InovaLoadingPage"
 import { ScanRoute } from "./ScanRoute"
+import { UsersRoute } from "./UsersRoute"
 
 /**
  * Navigates back
@@ -26,11 +27,11 @@ const NotFoundRoute = observer(() => {
 })
 
 export const AppRoute = observer(() => {
-    const key = AuthService.authenticatedUser || AuthService.isAdminAuth ? "authenticated" : "unauthenticated"
+    const key = AuthService.authenticatedUser ? "authenticated" : "unauthenticated"
 
     let router: ReturnType<typeof createBrowserRouter>
 
-    if (AuthService.authenticatedUser || AuthService.isAdminAuth) {
+    if (AuthService.authenticatedUser) {
         router = createBrowserRouter([
             {
                 path: "/",
@@ -50,9 +51,18 @@ export const AppRoute = observer(() => {
                         path: "profile",
                         element: <ProfileRoute />,
                     },
-                    AuthService.isAdminAuth
+                    AuthService.authenticatedUser?.isAdmin
                         ? {
-                              path: "admin",
+                              path: "users",
+                              element: <UsersRoute />,
+                          }
+                        : {
+                              path: "scan",
+                              element: <ScanRoute />,
+                          },
+                    AuthService.authenticatedUser?.isAdmin
+                        ? {
+                              path: "events",
                               element: <AdminRoute />,
                           }
                         : {
