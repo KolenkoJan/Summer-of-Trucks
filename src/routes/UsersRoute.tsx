@@ -14,7 +14,7 @@ export const UsersRoute: React.FC = observer(() => {
 
     useEffect(() => {
         userStore.isGettingUsersFromDatabase()
-    }, [])
+    }, [userStore])
 
     return (
         <PageContainer>
@@ -68,7 +68,7 @@ export const UsersRoute: React.FC = observer(() => {
                                             />
                                         </td>
                                         <td className="flex items-center justify-end">
-                                            <Button disabled={userStore.isDeletingUserFromDb[index]} onClick={() => userStore.removeUserFromDb(index)}>
+                                            <Button disabled={userStore.isDeletingUserFromDb[user.id]} onClick={() => userStore.removeUserFromDb(user)}>
                                                 -
                                             </Button>
                                         </td>

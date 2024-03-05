@@ -6,7 +6,7 @@ export class UserStore {
     users: Interfaces.IUser[] = []
     gettingError: Error | undefined
     isGettingUsersFromDb = false
-    isDeletingUserFromDb: boolean[] = []
+    isDeletingUserFromDb: Record<string, boolean> = {}
     isMakingUserAdmin: Record<string, boolean> = {}
 
     constructor() {
@@ -40,15 +40,15 @@ export class UserStore {
         }
     }
 
-    async removeUserFromDb(userID: number) {
-        this.isDeletingUserFromDb[userID] = true
+    async removeUserFromDb(user: Interfaces.IUser) {
+        this.isDeletingUserFromDb[user.id] = true
         try {
-            await firebase.api.users.delete(this.users[userID].id)
-            this.users.splice(userID, 1)
+            await firebase.api.users.delete(user.id)
+            this.users.splice(this.users.indexOf(user), 1)
         } catch (error) {
             alert(`Error: ${error.message}`)
         } finally {
-            this.isDeletingUserFromDb[userID] = false
+            this.isDeletingUserFromDb[user.id] = false
         }
     }
 }

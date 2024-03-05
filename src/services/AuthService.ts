@@ -3,7 +3,6 @@ import { makeAutoObservable } from "mobx"
 import { type NavigateFunction } from "react-router-dom"
 import { Interfaces, auth, firebase } from "../firebase"
 import { HTTPStatusCode } from "../firebase/error"
-import { UserStore } from "../stores/UserStore"
 
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000))
 
@@ -11,11 +10,10 @@ class _AuthService {
     isGettingAuth = false
     isGettingAuthData = false
     authenticatedUser: Interfaces.IUser | undefined // Added user property to store user information
-    userStore: UserStore = new UserStore()
     private readonly auth = auth
 
     constructor() {
-        makeAutoObservable(this, {})
+        makeAutoObservable(this)
         this.isGettingUserAuth()
     }
 
@@ -23,11 +21,7 @@ class _AuthService {
         this.isGettingAuthData = true
         await sleep()
         const storedUser = localStorage.getItem("user")
-        if (storedUser) {
-            this.authenticatedUser = JSON.parse(storedUser)
-        } else {
-            this.authenticatedUser = undefined
-        }
+        this.authenticatedUser = storedUser ? JSON.parse(storedUser) : undefined
         this.isGettingAuthData = false
     }
 
@@ -53,7 +47,6 @@ class _AuthService {
 
             if (signInResult.user) {
                 this.authenticatedUser = user
-                this.userStore.users.push(this.authenticatedUser)
                 localStorage.setItem("user", JSON.stringify(this.authenticatedUser))
                 navigate("/dashboard")
             }

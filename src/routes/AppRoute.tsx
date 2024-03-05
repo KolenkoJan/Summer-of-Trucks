@@ -32,6 +32,44 @@ export const AppRoute = observer(() => {
     let router: ReturnType<typeof createBrowserRouter>
 
     if (AuthService.authenticatedUser) {
+        const adminRoutes = [
+            {
+                path: "/",
+                element: <DashboardRoute />,
+            },
+            {
+                path: "profile",
+                element: <ProfileRoute />,
+            },
+            {
+                path: "users",
+                element: <UsersRoute />,
+            },
+            {
+                path: "events",
+                element: <AdminRoute />,
+            },
+            {
+                path: "scan",
+                element: <ScanRoute />,
+            },
+        ]
+
+        const regularRoutes = [
+            {
+                path: "/",
+                element: <DashboardRoute />,
+            },
+            {
+                path: "profile",
+                element: <ProfileRoute />,
+            },
+            {
+                path: "scan",
+                element: <ScanRoute />,
+            },
+        ]
+
         router = createBrowserRouter([
             {
                 path: "/",
@@ -42,34 +80,7 @@ export const AppRoute = observer(() => {
                     </>
                 ),
                 errorElement: <NotFoundRoute />,
-                children: [
-                    {
-                        path: "/",
-                        element: <DashboardRoute />,
-                    },
-                    {
-                        path: "profile",
-                        element: <ProfileRoute />,
-                    },
-                    AuthService.authenticatedUser?.isAdmin
-                        ? {
-                              path: "users",
-                              element: <UsersRoute />,
-                          }
-                        : {
-                              path: "scan",
-                              element: <ScanRoute />,
-                          },
-                    AuthService.authenticatedUser?.isAdmin
-                        ? {
-                              path: "events",
-                              element: <AdminRoute />,
-                          }
-                        : {
-                              path: "scan",
-                              element: <ScanRoute />,
-                          },
-                ],
+                children: AuthService.authenticatedUser?.isAdmin ? adminRoutes : regularRoutes,
             },
         ])
     } else {
