@@ -76,6 +76,7 @@ export const AdminRoute: React.FC = observer(() => {
                             <th>Latitude</th>
                             <th>Longitude</th>
                             <th>QR Code</th>
+                            <th>Users</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -111,6 +112,7 @@ export const AdminRoute: React.FC = observer(() => {
                                         <td>
                                             <QRCode value={dbEvent.id} style={{ height: "auto", width: "50px" }} />
                                         </td>
+                                        <td>{dbEvent.userIds}</td>
                                         <td>
                                             <Button disabled={eventsStore.isDeletingEvent[index]} onClick={() => eventsStore.deleteEvent(index)}>
                                                 -
