@@ -34,6 +34,7 @@ export const DashboardRoute: React.FC = observer(() => {
                             <th>Latitude</th>
                             <th>Longitude</th>
                             <th>QR-Code</th>
+                            <th>Users</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,6 +70,7 @@ export const DashboardRoute: React.FC = observer(() => {
                                         <td>
                                             <QRCode size={64} value={dbEvent.id} style={{ height: "auto", width: "50px" }} />
                                         </td>
+                                        <td>{dbEvent.userIds}</td>
                                     </tr>
                                 ))}
 
