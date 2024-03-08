@@ -2,6 +2,7 @@ import { QueryConstraint, query, addDoc, collection, deleteDoc, doc, getDoc, get
 import { Interfaces, db } from "../.."
 import { HTTPStatusCode } from "../../error"
 import { UserSchema } from "./Schema"
+import { FirebaseUtils } from "../../utils"
 
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000)) // 1 second
 
@@ -59,8 +60,10 @@ export const UserApi = {
         }
     },
 
-    async update(userId: string, body: Omit<Interfaces.IUser, "id">) {
+    async update(userId: string, _body: Interfaces.IUser) {
         await sleep()
+
+        const body = FirebaseUtils.toBody(_body)
 
         const schemaResult = UserSchema().validate(body)
         if (schemaResult.error) {

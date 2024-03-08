@@ -2,6 +2,7 @@ import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, where, Quer
 import { Interfaces, db } from "../.."
 import { HTTPStatusCode } from "../../error"
 import { EventSchema } from "./Schema"
+import { FirebaseUtils } from "../../utils"
 
 const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000)) // 1 second
 
@@ -36,7 +37,9 @@ export const EventsApi = {
         return this.getOne(doc.id)
     },
 
-    async update(eventId: string, body: Omit<Interfaces.IEvent, "id">) {
+    async update(eventId: string, _body: Interfaces.IEvent) {
+        const body = FirebaseUtils.toBody(_body)
+
         const schemaResult = EventSchema().validate(body)
         if (schemaResult.error) {
             throw new Error(HTTPStatusCode[400])
