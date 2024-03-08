@@ -33,13 +33,11 @@ export const SideMenu: React.FC<ISideMenuProps> = observer(({ isSideMenuVisible,
                         </li>
                     </>
                 )}
-                {!AuthService.authenticatedUser?.isAdmin && (
-                    <li>
-                        <SideMenuNavLink onClick={() => toggleSideMenuOnSelect && toggleSideMenuOnSelect()} to="/scan">
-                            Scan
-                        </SideMenuNavLink>
-                    </li>
-                )}
+                <li>
+                    <SideMenuNavLink onClick={() => toggleSideMenuOnSelect && toggleSideMenuOnSelect()} to="/scan">
+                        Scan
+                    </SideMenuNavLink>
+                </li>
                 <li>
                     <SideMenuNavLink onClick={() => toggleSideMenuOnSelect && toggleSideMenuOnSelect()} to="/profile">
                         Profile

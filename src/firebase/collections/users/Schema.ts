@@ -5,7 +5,7 @@ export const UserSchema = () =>
     Joi.object<IUser>({
         id: Joi.string().optional(),
         displayName: Joi.string().required(),
-        email: Joi.string().email().required(),
+        email: Joi.string().email({ tlds: false }).required(),
         isAdmin: Joi.boolean().optional(),
         photoURL: Joi.string(),
     }).required()
