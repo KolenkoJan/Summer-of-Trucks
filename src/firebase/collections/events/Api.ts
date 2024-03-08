@@ -58,14 +58,11 @@ export const EventsApi = {
     async assignUserToEvent(eventId: string, userId: string) {
         const event = await this.getOne(eventId)
 
-        console.log("event", event)
         event.userIds ??= []
         if (event.userIds.some((eventUserId) => eventUserId === userId)) {
-            console.log("error")
             throw new Error(HTTPStatusCode[409])
         } else {
             event.userIds.push(userId)
-            console.log("event updated", event)
             await this.update(eventId, event)
         }
     },

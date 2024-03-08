@@ -11,7 +11,6 @@ import { BackdropPage } from "../pages/BackdropPage"
 import { InovaLoadingPage } from "../pages/InovaLoadingPage"
 import { ScanRoute } from "./ScanRoute"
 import { UsersRoute } from "./UsersRoute"
-import { firebase } from "../firebase"
 
 /**
  * Navigates back
@@ -31,19 +30,6 @@ export const AppRoute = observer(() => {
     const key = AuthService.authenticatedUser ? "authenticated" : "unauthenticated"
 
     let router: ReturnType<typeof createBrowserRouter>
-
-    useEffect(() => {
-        const test = async () => {
-            try {
-                const res = await firebase.api.events.assignUserToEvent("OAsgZqaetPFzUf2hB9cP", "EGcgoctbxwEIOYil9bBW")
-                console.log(res)
-            } catch (error) {
-                console.error(error)
-            }
-        }
-
-        test()
-    }, [])
 
     if (AuthService.authenticatedUser) {
         router = createBrowserRouter([
