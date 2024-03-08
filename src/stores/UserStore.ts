@@ -42,6 +42,7 @@ export class UserStore {
 
     async removeUserFromDb(userID: number) {
         this.isDeletingUserFromDb[userID] = true
+
         try {
             await firebase.api.users.delete(this.users[userID].id)
             this.users.splice(userID, 1)

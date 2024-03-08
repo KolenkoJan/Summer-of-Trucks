@@ -1,4 +1,5 @@
 export const HTTPStatusCode = {
+    // Https status codes
     100: "Continue",
     101: "Switching Protocols",
     102: "Processing",
@@ -57,5 +58,7 @@ export const HTTPStatusCode = {
     505: "HTTP Version Not Supported",
     507: "Insufficient Storage",
     511: "Network Authentication Required",
+
+    // Admin status codes
     999: "Code error",
 }
