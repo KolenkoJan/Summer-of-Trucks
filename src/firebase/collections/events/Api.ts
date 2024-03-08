@@ -60,7 +60,7 @@ export const EventsApi = {
 
         event.userIds ??= []
         if (event.userIds.some((eventUserId) => eventUserId === userId)) {
-            throw new Error(HTTPStatusCode[409])
+            return
         } else {
             event.userIds.push(userId)
             await this.update(eventId, event)
